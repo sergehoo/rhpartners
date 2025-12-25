@@ -105,11 +105,11 @@ services:
 
       # Flags optionnels (si ton entrypoint les gère)
       RUN_MIGRATIONS: "0"
-      RUN_COLLECTSTATIC: "0"
+      RUN_COLLECTSTATIC: "1"
 
     volumes:
       # adapte les chemins si ton Dockerfile n'utilise pas /app
-      - static_volume:/app/static
+#      - static_volume:/app/static
       - static_volume:/app/staticfiles
       - media_volume:/var/www/media:rw
       - dbbackups:/app/dbbackup
