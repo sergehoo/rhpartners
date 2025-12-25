@@ -2,7 +2,7 @@
 from .base import *
 import os
 
-DEBUG = True
+DEBUG = False
 
 # Domaine(s) du site en prod
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")

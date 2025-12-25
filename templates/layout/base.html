@@ -1,34 +1,53 @@
-{##/Users/ogahserge/Documents/rhpartnersafric/templates/layout/base.html#}
 {% load static %}
 <!DOCTYPE html>
-<html lang="fr" class="dark">
+<html lang="fr" class="h-full">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <!-- Title (SEO) -->
-  <title>RH Partners Afric | Externalisation RH, Paie & Intérim</title>
+  <!-- Theme init BEFORE paint (avoid flash) -->
+  <script>
+    (function () {
+      try {
+        const stored = localStorage.getItem('theme'); // 'light' | 'dark' | null
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored || (prefersDark ? 'dark' : 'light');
+        const root = document.documentElement;
+        root.classList.toggle('dark', theme === 'dark');
+        root.classList.toggle('light', theme === 'light');
+      } catch (e) {}
+    })();
+  </script>
 
-  <!-- SEO: Description & Keywords -->
-  <meta name="description" content="RH Partners Afric accompagne les entreprises en externalisation RH & paie, recrutement, intérim, conseil RH, formation, coaching et leadership. Solutions fiables, conformes et sur mesure.">
-  <meta name="keywords" content="RH Partners Afric, externalisation RH, paie externalisée, recrutement, intérim, travail temporaire, sous-traitance, conseil RH, formation FDFP, coaching, leadership, Côte d’Ivoire, Afrique de l’Ouest">
+  <!-- Title -->
+  <title>{% block title %}RH Partners Afric | Externalisation RH, Paie & Intérim{% endblock %}</title>
+
+  <!-- SEO -->
+  <meta name="description" content="{% block meta_description %}RH Partners Afric accompagne les entreprises en externalisation RH & paie, recrutement, intérim, conseil RH, formation, coaching et leadership. Solutions fiables, conformes et sur mesure.{% endblock %}">
+  <meta name="keywords" content="RH Partners Afric, externalisation RH, paie externalisée, recrutement, intérim, travail temporaire, conseil RH, formation FDFP, coaching, leadership, Côte d’Ivoire, Afrique de l’Ouest">
   <meta name="author" content="RH Partners Afric">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <!-- Canonical (IMPORTANT) -->
-  <link rel="canonical" href="https://rhpartnersafric.com/">
+  <!-- Canonical -->
+  <link rel="canonical" href="{% block canonical %}https://rhpartnersafric.com/{% endblock %}">
 
-  <!-- Geo / Language -->
-  <meta http-equiv="content-language" content="fr">
-  <meta name="language" content="French">
+  <!-- OpenGraph / Twitter -->
+  <meta property="og:site_name" content="RH Partners Afric">
   <meta property="og:locale" content="fr_FR">
-  <!-- hreflang (si tu as plusieurs langues) -->
-  <link rel="alternate" href="https://rhpartnersafric.com/" hreflang="fr">
-  <link rel="alternate" href="https://rhpartnersafric.com/en/" hreflang="en">
-  <link rel="alternate" href="https://rhpartnersafric.com/" hreflang="x-default">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{% block og_url %}https://rhpartnersafric.com/{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}RH Partners Afric | Externalisation RH & Paie{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Externalisation RH & paie, recrutement, intérim, conseil RH, formation, coaching et leadership.{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}https://rhpartnersafric.com/static/assets/og/rhpartners-preview.png{% endblock %}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block tw_title %}RH Partners Afric | Externalisation RH & Paie{% endblock %}">
+  <meta name="twitter:description" content="{% block tw_description %}Recrutement, intérim, conseil RH, formation, coaching, leadership & paie externalisée.{% endblock %}">
+  <meta name="twitter:image" content="{% block tw_image %}https://rhpartnersafric.com/static/assets/og/rhpartners-preview.png{% endblock %}">
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/icons/favicon-32x32.png' %}">
@@ -36,7 +55,7 @@
   <link rel="shortcut icon" href="{% static 'assets/icons/favicon.ico' %}">
   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/icons/apple-touch-icon.png' %}">
 
-  <!-- Theme / PWA -->
+  <!-- PWA -->
   <meta name="theme-color" content="#051536">
   <meta name="color-scheme" content="light dark">
   <link rel="manifest" href="{% static 'manifest.webmanifest' %}">
@@ -44,112 +63,6 @@
   <meta name="apple-mobile-web-app-title" content="RH Partners Afric">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-  <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
-  <meta property="og:site_name" content="RH Partners Afric">
-  <meta property="og:title" content="RH Partners Afric | Externalisation RH & Paie">
-  <meta property="og:description" content="Externalisation RH & paie, recrutement, intérim, conseil RH, formation, coaching et leadership. Des solutions conformes et sur mesure.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://rhpartnersafric.com/">
-  <meta property="og:image" content="https://rhpartnersafric.com/assets/og/rhpartners-preview.png">
-  <meta property="og:image:secure_url" content="https://rhpartnersafric.com/assets/og/rhpartners-preview.png">
-  <meta property="og:image:alt" content="RH Partners Afric — Externalisation RH & Paie">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="RH Partners Afric | Externalisation RH & Paie">
-  <meta name="twitter:description" content="Recrutement, intérim, conseil RH, formation, coaching, leadership & paie externalisée.">
-  <meta name="twitter:image" content="https://rhpartnersafric.com/assets/og/rhpartners-preview.png">
-  <meta name="twitter:image:alt" content="RH Partners Afric — Externalisation RH & Paie">
-  <!-- Optionnel -->
-  <!-- <meta name="twitter:site" content="@RHPartnersAfric"> -->
-
-  <!-- Rich Results: JSON-LD (Organization + WebSite + Services) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://rhpartnersafric.com/#organization",
-        "name": "RH Partners Afric",
-        "url": "https://rhpartnersafric.com/",
-        "logo": "https://rhpartnersafric.com/assets/brand/logo.png",
-        "image": "https://rhpartnersafric.com/assets/og/rhpartners-preview.png",
-        "description": "Externalisation RH & paie, recrutement, intérim, conseil RH, formation, coaching et leadership.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "CI"
-        },
-        "areaServed": ["CI", "Afrique de l’Ouest"],
-        "sameAs": [
-          "https://www.linkedin.com/company/rhpartnersafric"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://rhpartnersafric.com/#website",
-        "url": "https://rhpartnersafric.com/",
-        "name": "RH Partners Afric",
-        "publisher": {
-          "@id": "https://rhpartnersafric.com/#organization"
-        },
-        "inLanguage": "fr",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://rhpartnersafric.com/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
-      },
-      {
-        "@type": "LocalBusiness",
-        "@id": "https://rhpartnersafric.com/#localbusiness",
-        "name": "RH Partners Afric",
-        "url": "https://rhpartnersafric.com/",
-        "image": "https://rhpartnersafric.com/assets/og/rhpartners-preview.png",
-        "telephone": "+22500000000",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "CI"
-        },
-        "priceRange": "F CFA",
-        "openingHoursSpecification": [
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00" }
-        ]
-      },
-      {
-        "@type": "Service",
-        "name": "Externalisation RH & Paie",
-        "provider": { "@id": "https://rhpartnersafric.com/#organization" },
-        "areaServed": ["CI", "Afrique de l’Ouest"],
-        "serviceType": ["Paie externalisée","Administration du personnel","Conformité sociale"]
-      },
-      {
-        "@type": "Service",
-        "name": "Recrutement & Sélection",
-        "provider": { "@id": "https://rhpartnersafric.com/#organization" },
-        "areaServed": ["CI", "Afrique de l’Ouest"],
-        "serviceType": ["Sourcing","Évaluation","Intégration","Garantie de remplacement"]
-      },
-      {
-        "@type": "Service",
-        "name": "Intérim / Travail Temporaire",
-        "provider": { "@id": "https://rhpartnersafric.com/#organization" },
-        "areaServed": ["CI", "Afrique de l’Ouest"],
-        "serviceType": ["Mise à disposition","Gestion administrative","Suivi social et médical"]
-      },
-      {
-        "@type": "Service",
-        "name": "Conseil RH, Coaching & Leadership",
-        "provider": { "@id": "https://rhpartnersafric.com/#organization" },
-        "areaServed": ["CI", "Afrique de l’Ouest"],
-        "serviceType": ["Audit RH","Conseil","Coaching","Développement du leadership"]
-      }
-    ]
-  }
-  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -177,212 +90,170 @@
     }
   </script>
 
+  <!-- Global styles (light/dark polish) -->
   <style>
-    * { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, sans-serif; }
-    .heading { font-family: 'Poppins', system-ui, sans-serif; }
-    /* ... tes styles existants ... */
+    :root { color-scheme: light dark; }
+    html, body { height: 100%; }
+    body { font-family: Inter, system-ui, sans-serif; }
+
+    /* Better smooth scroll without breaking focus */
+    html { scroll-behavior: smooth; }
+    :target { scroll-margin-top: 84px; }
+
+    /* Light mode background defaults */
+    html.light body {
+      background: linear-gradient(180deg, #f8fafc, #ffffff);
+      color: #0f172a;
+    }
+    /* Dark mode background defaults */
+    html.dark body {
+      background: #020817;
+      color: #e2e8f0;
+    }
+
+    .heading { font-family: Poppins, system-ui, sans-serif; }
+
+    /* Make "dark:card-glass" usable in light too */
+    .card-glass {
+      backdrop-filter: blur(18px);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.82));
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+    .card-light {
+      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    /* Reveal animation base */
+    .reveal { opacity: 0; transform: translateY(24px) scale(0.98); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-visible { opacity: 1; transform: translateY(0) scale(1); }
+
+    /* Improve focus accessibility */
+    :focus-visible { outline: 2px solid rgba(255,166,0,.9); outline-offset: 3px; border-radius: 12px; }
+
+    {% block extra_css %}{% endblock %}
   </style>
+
+  {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-[#020817] dark:text-slate-100">
 
-<!-- NAVBAR -->
-{% include "layout/nav.html" %}
-{% block content %}
-{% endblock %}
+<body class="min-h-screen flex flex-col">
+  <!-- NAV -->
+  {% include "layout/nav.html" %}
 
-<!-- FOOTER -->
-<footer class="bg-slate-900 border-t border-slate-800/80 py-5 dark:bg-[#020617]">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
-        <div class="flex items-center gap-2">
-            <span class="heading font-semibold text-slate-100">RH Partners <span class="text-gold">Afric</span></span>
-            <span class="hidden sm:inline text-slate-500">• Externalisation RH & Paie</span>
-        </div>
-        <div class="flex flex-wrap gap-3 items-center">
-            <a href="#" class="hover:text-gold">Mentions légales</a>
-            <a href="#" class="hover:text-gold">Politique de confidentialité</a>
-            <span class="text-slate-500">&copy; <span id="year"></span> RH Partners Afric. Tous droits réservés.</span>
-        </div>
+  <!-- PAGE -->
+  <main class="flex-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200 bg-white py-6 dark:bg-[#020617] dark:border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500 dark:text-slate-400">
+      <div class="flex items-center gap-2">
+        <span class="heading font-semibold text-slate-900 dark:text-slate-100">RH Partners <span class="text-gold">Afric</span></span>
+        <span class="hidden sm:inline text-slate-400 dark:text-slate-500">• Externalisation RH & Paie</span>
+      </div>
+      <div class="flex flex-wrap gap-3 items-center">
+        <a href="{/% url 'website:legal' %}" class="hover:text-gold">Mentions légales</a>
+        <a href="{/% url 'website:privacy' %}" class="hover:text-gold">Politique de confidentialité</a>
+        <span class="text-slate-400 dark:text-slate-500">&copy; <span id="year"></span> RH Partners Afric.</span>
+      </div>
     </div>
-</footer>
+  </footer>
 
-<script>
+  <!-- Global JS -->
+  <script>
     // YEAR
-    const yearEl = document.getElementById('year');
-    if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
-    }
+    (function () {
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    })();
 
-    // THEME
-    const htmlEl = document.documentElement;
-    const themeToggle = document.getElementById('theme-toggle');
-    const sunIcon = document.getElementById('theme-icon-sun');
-    const moonIcon = document.getElementById('theme-icon-moon');
+    // THEME toggle (expects nav button ids, safe if missing)
+    (function () {
+      const root = document.documentElement;
+      const themeToggle = document.getElementById('theme-toggle');
+      const sunIcon = document.getElementById('theme-icon-sun');
+      const moonIcon = document.getElementById('theme-icon-moon');
 
-    function setTheme(mode) {
-        if (mode === 'light') {
-            htmlEl.classList.remove('dark');
-            htmlEl.classList.add('light');
-            localStorage.setItem('theme', 'light');
-            if (sunIcon && moonIcon) {
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
-            }
-        } else {
-            htmlEl.classList.add('dark');
-            htmlEl.classList.remove('light');
-            localStorage.setItem('theme', 'dark');
-            if (sunIcon && moonIcon) {
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
-            }
+      function apply(mode) {
+        root.classList.toggle('dark', mode === 'dark');
+        root.classList.toggle('light', mode === 'light');
+        localStorage.setItem('theme', mode);
+
+        // optional icons
+        if (sunIcon && moonIcon) {
+          if (mode === 'dark') {
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+          } else {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+          }
         }
-    }
+      }
 
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) {
-        setTheme(storedTheme);
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        setTheme('dark');
-    } else {
-        setTheme('light');
-    }
+      // Init icons (based on current class)
+      const isDark = root.classList.contains('dark');
+      if (sunIcon && moonIcon) {
+        if (isDark) { sunIcon.classList.remove('hidden'); moonIcon.classList.add('hidden'); }
+        else { sunIcon.classList.add('hidden'); moonIcon.classList.remove('hidden'); }
+      }
 
-    if (themeToggle) {
+      if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            if (htmlEl.classList.contains('dark')) setTheme('light');
-            else setTheme('dark');
+          const mode = root.classList.contains('dark') ? 'light' : 'dark';
+          apply(mode);
         });
-    }
+      }
+    })();
 
-    // MOBILE MENU
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
+    // MOBILE MENU (safe)
+    (function () {
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+    })();
 
-    if (btn && menu) {
-        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
-    }
-
-    // SMOOTH SCROLL ANCHORS
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
+    // SMOOTH SCROLL ONLY for in-page anchors (safe)
+    (function () {
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
-            const href = a.getAttribute('href');
-            if (!href || href === '#') return;
-            const target = document.querySelector(href);
-            if (!target) return;
-            e.preventDefault();
-            const offset = 72;
-            const top = target.getBoundingClientRect().top + window.scrollY - offset;
-            window.scrollTo({top, behavior: 'smooth'});
-            if (menu && !menu.classList.contains('hidden')) {
-                menu.classList.add('hidden');
-            }
+          const href = a.getAttribute('href');
+          if (!href || href === '#') return;
+
+          const target = document.querySelector(href);
+          if (!target) return;
+
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+          const menu = document.getElementById('mobile-menu');
+          if (menu && !menu.classList.contains('hidden')) menu.classList.add('hidden');
         });
-    });
+      });
+    })();
 
-    // SCROLL REVEAL
-    const revealEls = document.querySelectorAll('.reveal');
-    if (revealEls.length) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {threshold: 0.15});
+    // REVEAL on scroll
+    (function () {
+      const revealEls = document.querySelectorAll('.reveal');
+      if (!revealEls.length) return;
 
-        revealEls.forEach(el => observer.observe(el));
-    }
-</script>
+      const obs = new IntersectionObserver((entries, o) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+            o.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
 
-<!-- pour le slider -->
-{#<script>#}
-{#    // HERO SLIDER#}
-{#    (function () {#}
-{#        const slider = document.getElementById("hero-slider");#}
-{#        if (!slider) return;#}
-{##}
-{#        const slides = Array.from(slider.querySelectorAll(".hero-slide"))#}
-{#            .filter((el, idx) => idx % 2 === 0); // colonnes texte seulement#}
-{##}
-{#        const textSlides = slides; // pour clarté#}
-{#        const visualSlides = Array.from(slider.querySelectorAll(".hero-slide-visual"));#}
-{##}
-{#        const prevBtn = document.getElementById("hero-prev");#}
-{#        const nextBtn = document.getElementById("hero-next");#}
-{#        const dotsContainer = document.getElementById("hero-dots");#}
-{##}
-{#        let current = 0;#}
-{#        let timer = null;#}
-{#        const AUTO_DELAY = 8000;#}
-{##}
-{#        // Dots#}
-{#        const dots = textSlides.map((_, idx) => {#}
-{#            const btn = document.createElement("button");#}
-{#            btn.type = "button";#}
-{#            btn.className = "w-2.5 h-2.5 rounded-full border border-slate-400/80 bg-slate-900/40 dark:bg-nuit/40 transition-all";#}
-{#            btn.setAttribute("data-index", idx);#}
-{#            dotsContainer.appendChild(btn);#}
-{#            return btn;#}
-{#        });#}
-{##}
-{#        function updateSlides() {#}
-{#            textSlides.forEach((slide, idx) => {#}
-{#                slide.classList.toggle("hero-slide-active", idx === current);#}
-{#            });#}
-{#            visualSlides.forEach((slide, idx) => {#}
-{#                slide.classList.toggle("hero-slide-active", idx === current);#}
-{#            });#}
-{#            dots.forEach((dot, idx) => {#}
-{#                dot.className =#}
-{#                    "w-2.5 h-2.5 rounded-full transition-all " +#}
-{#                    (idx === current#}
-{#                        ? "bg-gold border-gold scale-110"#}
-{#                        : "border-slate-400/80 bg-slate-900/40 dark:bg-nuit/40");#}
-{#            });#}
-{#        }#}
-{##}
-{#        function goTo(index) {#}
-{#            current = (index + textSlides.length) % textSlides.length;#}
-{#            updateSlides();#}
-{#            restartTimer();#}
-{#        }#}
-{##}
-{#        function next() {#}
-{#            goTo(current + 1);#}
-{#        }#}
-{##}
-{#        function prev() {#}
-{#            goTo(current - 1);#}
-{#        }#}
-{##}
-{#        function restartTimer() {#}
-{#            if (timer) clearInterval(timer);#}
-{#            timer = setInterval(next, AUTO_DELAY);#}
-{#        }#}
-{##}
-{#        // Events#}
-{#        if (nextBtn) nextBtn.addEventListener("click", next);#}
-{#        if (prevBtn) prevBtn.addEventListener("click", prev);#}
-{#        dots.forEach(dot => {#}
-{#            dot.addEventListener("click", () => {#}
-{#                const idx = parseInt(dot.getAttribute("data-index") || "0", 10);#}
-{#                goTo(idx);#}
-{#            });#}
-{#        });#}
-{##}
-{#        slider.addEventListener("mouseenter", () => {#}
-{#            if (timer) clearInterval(timer);#}
-{#        });#}
-{#        slider.addEventListener("mouseleave", () => {#}
-{#            restartTimer();#}
-{#        });#}
-{##}
-{#        // Init#}
-{#        updateSlides();#}
-{#        restartTimer();#}
-{#    })();#}
-{#</script>#}
+      revealEls.forEach(el => obs.observe(el));
+    })();
+
+    {% block extra_js %}{% endblock %}
+  </script>
 </body>
 </html>

@@ -5,667 +5,696 @@
 
     <main class="pt-20">
         <!-- HERO SLIDER -->
-<!-- HERO SLIDER -->
-<style>
-    .hero-slide {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        transform: translateX(24px);
-        pointer-events: none;
-        transition:
-            opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-            transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+        <!-- HERO SLIDER -->
+        <style>
+            html.light .hero-bg {
+                background: radial-gradient(circle at 10% -10%, rgba(255, 166, 0, 0.18), transparent 55%),
+                radial-gradient(circle at 80% 110%, rgba(255, 166, 0, 0.12), transparent 55%),
+                linear-gradient(135deg, #ffffff, #f8fafc);
+            }
 
-    .hero-slide-active {
-        opacity: 1;
-        transform: translateX(0);
-        pointer-events: auto;
-    }
+            html.light .hero-bg * {
+                color: #0f172a;
+            }
 
-    /* Animation pour les éléments du contenu */
-    .slide-content > * {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-    }
+            html.light .badge-pill {
+                border-color: rgba(15, 23, 42, 0.10);
+                background: radial-gradient(circle at 0 0, rgba(255, 166, 0, 0.20), transparent 55%);
+            }
 
-    .hero-slide-active .slide-content > * {
-        animation: fadeInUp 0.6s forwards;
-    }
+            html.light .stat-pill {
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(241, 245, 249, 0.96));
+                border-color: rgba(148, 163, 184, 0.45);
+            }
 
-    .hero-slide-active .slide-content > *:nth-child(1) {
-        animation-delay: 0.1s;
-    }
+            .hero-slide {
+                position: absolute;
+                inset: 0;
+                opacity: 0;
+                transform: translateX(24px);
+                pointer-events: none;
+                transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
 
-    .hero-slide-active .slide-content > *:nth-child(2) {
-        animation-delay: 0.3s;
-    }
+            .hero-slide-active {
+                opacity: 1;
+                transform: translateX(0);
+                pointer-events: auto;
+            }
 
-    .hero-slide-active .slide-content > *:nth-child(3) {
-        animation-delay: 0.5s;
-    }
+            /* Animation pour les éléments du contenu */
+            .slide-content > * {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
 
-    .hero-slide-active .slide-content > *:nth-child(4) {
-        animation-delay: 0.7s;
-    }
+            .hero-slide-active .slide-content > * {
+                animation: fadeInUp 0.6s forwards;
+            }
 
-    .hero-slide-active .slide-content > *:nth-child(5) {
-        animation-delay: 0.9s;
-    }
+            .hero-slide-active .slide-content > *:nth-child(1) {
+                animation-delay: 0.1s;
+            }
 
-    @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+            .hero-slide-active .slide-content > *:nth-child(2) {
+                animation-delay: 0.3s;
+            }
 
-    /* Visuels */
-    .hero-slide-visual {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        transform: translateX(24px);
-        pointer-events: none;
-        transition:
-            opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-            transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+            .hero-slide-active .slide-content > *:nth-child(3) {
+                animation-delay: 0.5s;
+            }
 
-    .hero-slide-visual.hero-slide-active {
-        opacity: 1;
-        transform: translateX(0);
-        pointer-events: auto;
-    }
+            .hero-slide-active .slide-content > *:nth-child(4) {
+                animation-delay: 0.7s;
+            }
 
-    .hero-slide-visual .floating {
-        animation: float 6s ease-in-out infinite;
-    }
+            .hero-slide-active .slide-content > *:nth-child(5) {
+                animation-delay: 0.9s;
+            }
 
-    .hero-slide-visual > div > * {
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-        animation: cardAppear 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
+            @keyframes fadeInUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
 
-    .hero-slide-visual.hero-slide-active > div > *:nth-child(1) {
-        animation-delay: 0.4s;
-    }
+            /* Visuels */
+            .hero-slide-visual {
+                position: absolute;
+                inset: 0;
+                opacity: 0;
+                transform: translateX(24px);
+                pointer-events: none;
+                transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
 
-    .hero-slide-visual.hero-slide-active > div > *:nth-child(2) {
-        animation-delay: 0.6s;
-    }
+            .hero-slide-visual.hero-slide-active {
+                opacity: 1;
+                transform: translateX(0);
+                pointer-events: auto;
+            }
 
-    @keyframes cardAppear {
-        to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-    }
+            .hero-slide-visual .floating {
+                animation: float 6s ease-in-out infinite;
+            }
 
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0) rotate(0deg);
-        }
-        50% {
-            transform: translateY(-10px) rotate(0.5deg);
-        }
-    }
+            .hero-slide-visual > div > * {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+                animation: cardAppear 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
 
-    /* Animation pour les statistiques */
-    .stat-pill span.heading {
-        position: relative;
-        overflow: hidden;
-    }
+            .hero-slide-visual.hero-slide-active > div > *:nth-child(1) {
+                animation-delay: 0.4s;
+            }
 
-    .stat-pill span.heading::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: -100%;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #ffa600, transparent);
-        animation: statLine 2s ease-in-out infinite;
-    }
+            .hero-slide-visual.hero-slide-active > div > *:nth-child(2) {
+                animation-delay: 0.6s;
+            }
 
-    @keyframes statLine {
-        0% {
-            left: -100%;
-        }
-        50%, 100% {
-            left: 100%;
-        }
-    }
+            @keyframes cardAppear {
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
 
-    /* Animation pour les badges */
-    .badge-pill {
-        animation: badgePulse 4s infinite;
-    }
+            @keyframes float {
+                0%, 100% {
+                    transform: translateY(0) rotate(0deg);
+                }
+                50% {
+                    transform: translateY(-10px) rotate(0.5deg);
+                }
+            }
 
-    @keyframes badgePulse {
-        0%, 100% {
-            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.1);
-        }
-        50% {
-            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
-        }
-    }
+            /* Animation pour les statistiques */
+            .stat-pill span.heading {
+                position: relative;
+                overflow: hidden;
+            }
 
-    /* Animation pour les boutons */
-    .pulse-gold {
-        position: relative;
-        overflow: hidden;
-    }
+            .stat-pill span.heading::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: -100%;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #ffa600, transparent);
+                animation: statLine 2s ease-in-out infinite;
+            }
 
-    .pulse-gold::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        animation: buttonShine 3s infinite;
-    }
+            @keyframes statLine {
+                0% {
+                    left: -100%;
+                }
+                50%, 100% {
+                    left: 100%;
+                }
+            }
 
-    @keyframes buttonShine {
-        to {
-            left: 100%;
-        }
-    }
+            /* Animation pour les badges */
+            .badge-pill {
+                animation: badgePulse 4s infinite;
+            }
 
-    /* Dots */
-    .hero-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background-color: rgba(255, 255, 255, 0.2);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
+            @keyframes badgePulse {
+                0%, 100% {
+                    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.1);
+                }
+                50% {
+                    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+                }
+            }
 
-    .hero-dot.active {
-        width: 32px;
-        background-color: #ffa600;
-        animation: dotPulse 2s infinite;
-    }
+            /* Animation pour les boutons */
+            .pulse-gold {
+                position: relative;
+                overflow: hidden;
+            }
 
-    .hero-dot.active::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        background: rgba(212, 175, 55, 0.3);
-        border-radius: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        animation: dotRipple 2s infinite;
-    }
+            .pulse-gold::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                animation: buttonShine 3s infinite;
+            }
 
-    @keyframes dotPulse {
-        0%, 100% {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.1);
-        }
-    }
+            @keyframes buttonShine {
+                to {
+                    left: 100%;
+                }
+            }
 
-    @keyframes dotRipple {
-        to {
-            transform: translate(-50%, -50%) scale(2);
-            opacity: 0;
-        }
-    }
+            /* Dots */
+            .hero-dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 999px;
+                background-color: rgba(255, 255, 255, 0.2);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+            }
 
-    /* Images visuelles */
-    .hero-slide-visual img {
-        transform: scale(1.05);
-        transition: transform 8s ease-out;
-    }
+            .hero-dot.active {
+                width: 32px;
+                background-color: #ffa600;
+                animation: dotPulse 2s infinite;
+            }
 
-    .hero-slide-visual.hero-slide-active img {
-        transform: scale(1);
-    }
+            .hero-dot.active::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: 100%;
+                background: rgba(212, 175, 55, 0.3);
+                border-radius: 50%;
+                transform: translate(-50%, -50%) scale(0);
+                animation: dotRipple 2s infinite;
+            }
 
-    /* Glow de fond animé */
-    .absolute.inset-0.opacity-10.pointer-events-none > div {
-        animation: glowMove 20s ease-in-out infinite alternate;
-    }
+            @keyframes dotPulse {
+                0%, 100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.1);
+                }
+            }
 
-    .absolute.inset-0.opacity-10.pointer-events-none > div:nth-child(2) {
-        animation-delay: -10s;
-    }
+            @keyframes dotRipple {
+                to {
+                    transform: translate(-50%, -50%) scale(2);
+                    opacity: 0;
+                }
+            }
 
-    @keyframes glowMove {
-        0% {
-            transform: translate(0, 0) scale(1);
-        }
-        100% {
-            transform: translate(20px, 20px) scale(1.05);
-        }
-    }
+            /* Images visuelles */
+            .hero-slide-visual img {
+                transform: scale(1.05);
+                transition: transform 8s ease-out;
+            }
 
-    /* Layout slider */
-    #hero-slider {
-        display: block;
-    }
+            .hero-slide-visual.hero-slide-active img {
+                transform: scale(1);
+            }
 
-    .hero-text-col,
-    .hero-visual-col {
-        position: relative;
-        min-height: 360px;
-    }
+            /* Glow de fond animé */
+            .absolute.inset-0.opacity-10.pointer-events-none > div {
+                animation: glowMove 20s ease-in-out infinite alternate;
+            }
 
-    @media (min-width: 1024px) {
-        #hero-slider {
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 3rem;
-            align-items: stretch;
-            min-height: 400px;
-        }
+            .absolute.inset-0.opacity-10.pointer-events-none > div:nth-child(2) {
+                animation-delay: -10s;
+            }
 
-        .hero-text-col {
-            min-height: 400px;
-        }
+            @keyframes glowMove {
+                0% {
+                    transform: translate(0, 0) scale(1);
+                }
+                100% {
+                    transform: translate(20px, 20px) scale(1.05);
+                }
+            }
 
-        .hero-visual-col {
-            min-height: 400px;
-        }
-    }
-</style>
+            /* Layout slider */
+            #hero-slider {
+                display: block;
+            }
 
-<section id="home" class="hero-bg relative text-slate-50 overflow-hidden">
-    <!-- Glow de fond animé -->
-    <div class="absolute inset-0 opacity-10 pointer-events-none">
-        <div class="w-[500px] h-[500px] rounded-full bg-gold blur-3xl -top-40 -left-40 absolute"></div>
-        <div class="w-[450px] h-[450px] rounded-full bg-gold/60 blur-3xl bottom-[-220px] right-[-160px] absolute"></div>
-    </div>
+            .hero-text-col,
+            .hero-visual-col {
+                position: relative;
+                min-height: 360px;
+            }
 
-    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div id="hero-slider">
+            @media (min-width: 1024px) {
+                #hero-slider {
+                    display: grid;
+                    grid-template-columns: 1.1fr 0.9fr;
+                    gap: 3rem;
+                    align-items: stretch;
+                    min-height: 400px;
+                }
 
-            <!-- COLONNE TEXTE -->
-            <div class="hero-text-col">
-                <!-- SLIDE 1 – Externalisation RH -->
-                <div class="hero-slide hero-slide-active" data-slide="0">
-                    <div class="slide-content space-y-7">
-                        <div class="badge-pill inline-flex items-center gap-2 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-slate-200">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                            Cabinet RH & Paie – Afrique
-                        </div>
+                .hero-text-col {
+                    min-height: 400px;
+                }
 
-                        <h1 class="heading text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
-                            Externalisez vos <span class="text-gold">Ressources Humaines</span>
-                            <br class="hidden sm:block">
-                            et sécurisez votre <span class="text-slate-50">paie.</span>
-                        </h1>
+                .hero-visual-col {
+                    min-height: 400px;
+                }
+            }
+        </style>
 
-                        <p class="text-sm sm:text-base text-slate-200 max-w-xl">
-                            RH Partners Afric prend en charge votre fonction RH (paie, administration, recrutement,
-                            création d'entreprise) pour que vous puissiez vous concentrer sur votre cœur de métier,
-                            en toute conformité CNPS & fiscale.
-                        </p>
-
-                        <div class="flex flex-wrap gap-3">
-                            <a href="#contact"
-                               class="pulse-gold inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold text-nuit text-sm font-semibold shadow-soft-gold hover:-translate-y-[1px] transition-all duration-300 hover:shadow-lg hover:shadow-gold/20">
-                                <span>Planifier un rendez-vous</span>
-                                <i class="fas fa-calendar-check text-xs"></i>
-                            </a>
-                            <a href="#services"
-                               class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200/60 text-sm text-slate-100 hover:bg-slate-50/5 transition-all duration-300 hover:border-gold/40">
-                                <i class="fas fa-layer-group text-xs text-gold"></i>
-                                <span>Découvrir nos solutions</span>
-                            </a>
-                        </div>
-
-                        <div class="flex flex-wrap gap-5 pt-4 text-[11px] sm:text-xs text-slate-200">
-                            <div class="stat-pill px-4 py-2 flex items-center gap-2">
-                                <span class="heading text-lg font-semibold text-gold">50+</span>
-                                <span>entreprises accompagnées</span>
-                            </div>
-                            <div class="stat-pill px-4 py-2 flex items-center gap-2">
-                                <span class="heading text-lg font-semibold text-gold">10k+</span>
-                                <span>bulletins de paie / an</span>
-                            </div>
-                            <div class="stat-pill px-4 py-2 flex items-center gap-2">
-                                <span class="heading text-lg font-semibold text-gold">0</span>
-                                <span>pénalité CNPS déclarée</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SLIDE 2 – Paie externalisée -->
-                <div class="hero-slide" data-slide="1">
-                    <div class="slide-content space-y-7">
-                        <div class="badge-pill inline-flex items-center gap-2 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-slate-200">
-                            <i class="fas fa-file-invoice-dollar text-gold text-xs"></i>
-                            Paie externalisée premium
-                        </div>
-
-                        <h1 class="heading text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
-                            Zéro retard, zéro erreur
-                            <br class="hidden sm:block">
-                            sur vos <span class="text-gold">bulletins de paie.</span>
-                        </h1>
-
-                        <p class="text-sm sm:text-base text-slate-200 max-w-xl">
-                            De la collecte des variables jusqu’aux déclarations sociales et fiscales, nous sécurisons
-                            tout le process de paie, avec un archivage numérique structuré et des exports CNPS / fisc
-                            pré-formatés.
-                        </p>
-
-                        <div class="flex flex-wrap gap-3">
-                            <a href="#pricing"
-                               class="pulse-gold inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold text-nuit text-sm font-semibold shadow-soft-gold hover:-translate-y-[1px] transition-all duration-300 hover:shadow-lg hover:shadow-gold/20">
-                                <span>Voir les packs Paie</span>
-                                <i class="fas fa-arrow-right text-xs"></i>
-                            </a>
-                            <a href="#contact"
-                               class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200/60 text-sm text-slate-100 hover:bg-slate-50/5 transition-all duration-300 hover:border-gold/40">
-                                <i class="fas fa-envelope-open-text text-xs text-gold"></i>
-                                <span>Demander une simulation</span>
-                            </a>
-                        </div>
-
-                        <div class="flex flex-wrap gap-5 pt-4 text-[11px] sm:text-xs text-slate-200">
-                            <div class="stat-pill px-4 py-2 flex items-center gap-2">
-                                <span class="heading text-lg font-semibold text-gold">100%</span>
-                                <span>déclarations à jour</span>
-                            </div>
-                            <div class="stat-pill px-4 py-2 flex items-center gap-2">
-                                <span class="heading text-lg font-semibold text-gold">48h</span>
-                                <span>pour traiter la paie</span>
-                            </div>
-                            <div class="stat-pill px-4 py-2 flex items-center gap-2">
-                                <span class="heading text-lg font-semibold text-gold">&lt; 1%</span>
-                                <span>taux de correction</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SLIDE 3 – Recrutement & Talents -->
-                <div class="hero-slide" data-slide="2">
-                    <div class="slide-content space-y-7">
-                        <div class="badge-pill inline-flex items-center gap-2 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-slate-200">
-                            <i class="fas fa-user-tie text-gold text-xs"></i>
-                            Recrutement & Talents
-                        </div>
-
-                        <h1 class="heading text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
-                            Attirez, sélectionnez
-                            <br class="hidden sm:block">
-                            et onboardez les <span class="text-gold">meilleurs profils.</span>
-                        </h1>
-
-                        <p class="text-sm sm:text-base text-slate-200 max-w-xl">
-                            Plateforme de candidatures, tri des CV, entretiens structurés et suivi des candidats : nous
-                            industrialisons votre processus de recrutement tout en gardant une approche humaine.
-                        </p>
-
-                        <div class="flex flex-wrap gap-3">
-                            <a href="{% url 'website:job_list' %}"
-                               class="pulse-gold inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold text-nuit text-sm font-semibold shadow-soft-gold hover:-translate-y-[1px] transition-all duration-300 hover:shadow-lg hover:shadow-gold/20">
-                                <span>Voir les offres en cours</span>
-                                <i class="fas fa-briefcase text-xs"></i>
-                            </a>
-                            <a href="#contact"
-                               class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200/60 text-sm text-slate-100 hover:bg-slate-50/5 transition-all duration-300 hover:border-gold/40">
-                                <i class="fas fa-users-cog text-xs text-gold"></i>
-                                <span>Lancer une mission de recrutement</span>
-                            </a>
-                        </div>
-
-                        <div class="flex flex-wrap gap-5 pt-4 text-[11px] sm:text-xs text-slate-200">
-                            <div class="stat-pill px-4 py-2 flex items-center gap-2">
-                                <span class="heading text-lg font-semibold text-gold">72h</span>
-                                <span>pour recevoir les premiers CV</span>
-                            </div>
-                            <div class="stat-pill px-4 py-2 flex items-center gap-2">
-                                <span class="heading text-lg font-semibold text-gold">90%</span>
-                                <span>de périodes d’essai validées</span>
-                            </div>
-                            <div class="stat-pill px-4 py-2 flex items-center gap-2">
-                                <span class="heading text-lg font-semibold text-gold">+ Afrique</span>
-                                <span>vivier régional de talents</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <section id="home" class="hero-bg relative text-slate-50 overflow-hidden">
+            <!-- Glow de fond animé -->
+            <div class="absolute inset-0 opacity-10 pointer-events-none">
+                <div class="w-[500px] h-[500px] rounded-full bg-gold blur-3xl -top-40 -left-40 absolute"></div>
+                <div class="w-[450px] h-[450px] rounded-full bg-gold/60 blur-3xl bottom-[-220px] right-[-160px] absolute"></div>
             </div>
 
-            <!-- COLONNE VISUELLE -->
-            <div class="hero-visual-col hidden lg:block">
-                <!-- Visuel slide 1 -->
-                <div class="hero-slide-visual hero-slide-active" data-slide="0">
-                    <div class="space-y-5">
-                        <div class="floating rounded-3xl overflow-hidden border border-slate-700/70 bg-slate-900/70 shadow-2xl">
-                            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1100&q=80" alt="Réunion d'équipe RH" class="w-full h-60 object-cover">
-                            <div class="p-4 flex items-center justify-between">
-                                <div>
-                                    <p class="text-[11px] uppercase tracking-[0.18em] text-slate-300">Équipe dédiée</p>
-                                    <p class="heading text-sm font-semibold text-slate-50">Experts RH & Paie UEMOA</p>
+            <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+                <div id="hero-slider">
+
+                    <!-- COLONNE TEXTE -->
+                    <div class="hero-text-col">
+                        <!-- SLIDE 1 – Externalisation RH -->
+                        <div class="hero-slide hero-slide-active" data-slide="0">
+                            <div class="slide-content space-y-7">
+                                <div class="badge-pill inline-flex items-center gap-2 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-slate-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    Cabinet RH & Paie – Afrique
                                 </div>
-                                <div class="flex -space-x-2">
+
+                                <h1 class="heading text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+                                    Externalisez vos <span class="text-gold">Ressources Humaines</span>
+                                    <br class="hidden sm:block">
+                                    et sécurisez votre <span class="text-slate-50">paie.</span>
+                                </h1>
+
+                                <p class="text-sm sm:text-base text-slate-200 max-w-xl">
+                                    RH Partners Afric prend en charge votre fonction RH (paie, administration,
+                                    recrutement,
+                                    création d'entreprise) pour que vous puissiez vous concentrer sur votre cœur de
+                                    métier,
+                                    en toute conformité CNPS & fiscale.
+                                </p>
+
+                                <div class="flex flex-wrap gap-3">
+                                    <a href="#contact"
+                                       class="pulse-gold inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold text-nuit text-sm font-semibold shadow-soft-gold hover:-translate-y-[1px] transition-all duration-300 hover:shadow-lg hover:shadow-gold/20">
+                                        <span>Planifier un rendez-vous</span>
+                                        <i class="fas fa-calendar-check text-xs"></i>
+                                    </a>
+                                    <a href="#services"
+                                       class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200/60 text-sm text-slate-100 hover:bg-slate-50/5 transition-all duration-300 hover:border-gold/40">
+                                        <i class="fas fa-layer-group text-xs text-gold"></i>
+                                        <span>Découvrir nos solutions</span>
+                                    </a>
+                                </div>
+
+                                <div class="flex flex-wrap gap-5 pt-4 text-[11px] sm:text-xs text-slate-200">
+                                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                                        <span class="heading text-lg font-semibold text-gold">50+</span>
+                                        <span>entreprises accompagnées</span>
+                                    </div>
+                                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                                        <span class="heading text-lg font-semibold text-gold">10k+</span>
+                                        <span>bulletins de paie / an</span>
+                                    </div>
+                                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                                        <span class="heading text-lg font-semibold text-gold">0</span>
+                                        <span>pénalité CNPS déclarée</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SLIDE 2 – Paie externalisée -->
+                        <div class="hero-slide" data-slide="1">
+                            <div class="slide-content space-y-7">
+                                <div class="badge-pill inline-flex items-center gap-2 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-slate-200">
+                                    <i class="fas fa-file-invoice-dollar text-gold text-xs"></i>
+                                    Paie externalisée premium
+                                </div>
+
+                                <h1 class="heading text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+                                    Zéro retard, zéro erreur
+                                    <br class="hidden sm:block">
+                                    sur vos <span class="text-gold">bulletins de paie.</span>
+                                </h1>
+
+                                <p class="text-sm sm:text-base text-slate-200 max-w-xl">
+                                    De la collecte des variables jusqu’aux déclarations sociales et fiscales, nous
+                                    sécurisons
+                                    tout le process de paie, avec un archivage numérique structuré et des exports CNPS /
+                                    fisc
+                                    pré-formatés.
+                                </p>
+
+                                <div class="flex flex-wrap gap-3">
+                                    <a href="#pricing"
+                                       class="pulse-gold inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold text-nuit text-sm font-semibold shadow-soft-gold hover:-translate-y-[1px] transition-all duration-300 hover:shadow-lg hover:shadow-gold/20">
+                                        <span>Voir les packs Paie</span>
+                                        <i class="fas fa-arrow-right text-xs"></i>
+                                    </a>
+                                    <a href="#contact"
+                                       class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200/60 text-sm text-slate-100 hover:bg-slate-50/5 transition-all duration-300 hover:border-gold/40">
+                                        <i class="fas fa-envelope-open-text text-xs text-gold"></i>
+                                        <span>Demander une simulation</span>
+                                    </a>
+                                </div>
+
+                                <div class="flex flex-wrap gap-5 pt-4 text-[11px] sm:text-xs text-slate-200">
+                                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                                        <span class="heading text-lg font-semibold text-gold">100%</span>
+                                        <span>déclarations à jour</span>
+                                    </div>
+                                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                                        <span class="heading text-lg font-semibold text-gold">48h</span>
+                                        <span>pour traiter la paie</span>
+                                    </div>
+                                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                                        <span class="heading text-lg font-semibold text-gold">&lt; 1%</span>
+                                        <span>taux de correction</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SLIDE 3 – Recrutement & Talents -->
+                        <div class="hero-slide" data-slide="2">
+                            <div class="slide-content space-y-7">
+                                <div class="badge-pill inline-flex items-center gap-2 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-slate-200">
+                                    <i class="fas fa-user-tie text-gold text-xs"></i>
+                                    Recrutement & Talents
+                                </div>
+
+                                <h1 class="heading text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+                                    Attirez, sélectionnez
+                                    <br class="hidden sm:block">
+                                    et onboardez les <span class="text-gold">meilleurs profils.</span>
+                                </h1>
+
+                                <p class="text-sm sm:text-base text-slate-200 max-w-xl">
+                                    Plateforme de candidatures, tri des CV, entretiens structurés et suivi des candidats
+                                    : nous
+                                    industrialisons votre processus de recrutement tout en gardant une approche humaine.
+                                </p>
+
+                                <div class="flex flex-wrap gap-3">
+                                    <a href="{% url 'website:job_list' %}"
+                                       class="pulse-gold inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold text-nuit text-sm font-semibold shadow-soft-gold hover:-translate-y-[1px] transition-all duration-300 hover:shadow-lg hover:shadow-gold/20">
+                                        <span>Voir les offres en cours</span>
+                                        <i class="fas fa-briefcase text-xs"></i>
+                                    </a>
+                                    <a href="#contact"
+                                       class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200/60 text-sm text-slate-100 hover:bg-slate-50/5 transition-all duration-300 hover:border-gold/40">
+                                        <i class="fas fa-users-cog text-xs text-gold"></i>
+                                        <span>Lancer une mission de recrutement</span>
+                                    </a>
+                                </div>
+
+                                <div class="flex flex-wrap gap-5 pt-4 text-[11px] sm:text-xs text-slate-200">
+                                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                                        <span class="heading text-lg font-semibold text-gold">72h</span>
+                                        <span>pour recevoir les premiers CV</span>
+                                    </div>
+                                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                                        <span class="heading text-lg font-semibold text-gold">90%</span>
+                                        <span>de périodes d’essai validées</span>
+                                    </div>
+                                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                                        <span class="heading text-lg font-semibold text-gold">+ Afrique</span>
+                                        <span>vivier régional de talents</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COLONNE VISUELLE -->
+                    <div class="hero-visual-col hidden lg:block">
+                        <!-- Visuel slide 1 -->
+                        <div class="hero-slide-visual hero-slide-active" data-slide="0">
+                            <div class="space-y-5">
+                                <div class="floating rounded-3xl overflow-hidden border border-slate-700/70 bg-slate-900/70 shadow-2xl">
+                                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1100&q=80"
+                                         alt="Réunion d'équipe RH" class="w-full h-60 object-cover">
+                                    <div class="p-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="text-[11px] uppercase tracking-[0.18em] text-slate-300">Équipe
+                                                dédiée</p>
+                                            <p class="heading text-sm font-semibold text-slate-50">Experts RH & Paie
+                                                UEMOA</p>
+                                        </div>
+                                        <div class="flex -space-x-2">
                                     <span class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-[11px] text-nuit font-semibold border border-slate-300">
                                         RH
                                     </span>
-                                    <span class="w-7 h-7 rounded-full bg-gold flex items-center justify-center text-[11px] text-nuit font-semibold border border-amber-200">
+                                            <span class="w-7 h-7 rounded-full bg-gold flex items-center justify-center text-[11px] text-nuit font-semibold border border-amber-200">
                                         P
                                     </span>
-                                    <span class="w-7 h-7 rounded-full bg-slate-900 flex items-center justify-center text-[11px] text-gold font-semibold border border-slate-500">
+                                            <span class="w-7 h-7 rounded-full bg-slate-900 flex items-center justify-center text-[11px] text-gold font-semibold border border-slate-500">
                                         +
                                     </span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="card-glass rounded-3xl p-5 relative overflow-hidden border border-slate-700/80">
-                            <div class="absolute -top-16 -right-10 w-32 h-32 rounded-full bg-gold/20 blur-3xl animate-pulse"></div>
+                                <div class="card-glass rounded-3xl p-5 relative overflow-hidden border border-slate-700/80">
+                                    <div class="absolute -top-16 -right-10 w-32 h-32 rounded-full bg-gold/20 blur-3xl animate-pulse"></div>
 
-                            <div class="flex items-center justify-between mb-3">
-                                <div>
-                                    <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                                        Synthèse paie – ce mois
-                                    </p>
-                                    <h3 class="heading text-base font-semibold text-slate-50">
-                                        Tableau de bord RH & Paie
-                                    </h3>
-                                </div>
-                                <span class="inline-flex items-center gap-1 px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-gold bg-nuit/60 rounded-full border border-slate-600">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div>
+                                            <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400">
+                                                Synthèse paie – ce mois
+                                            </p>
+                                            <h3 class="heading text-base font-semibold text-slate-50">
+                                                Tableau de bord RH & Paie
+                                            </h3>
+                                        </div>
+                                        <span class="inline-flex items-center gap-1 px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-gold bg-nuit/60 rounded-full border border-slate-600">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                                     Temps réel
                                 </span>
-                            </div>
+                                    </div>
 
-                            <div class="grid grid-cols-3 gap-3 text-[11px] text-slate-200 mb-4">
-                                <div class="rounded-xl border border-slate-600/70 px-3 py-2 hover:border-gold/40 transition-colors duration-300">
-                                    <div class="text-slate-400">Effectif</div>
-                                    <div class="heading text-sm text-slate-50">128</div>
-                                </div>
-                                <div class="rounded-xl border border-slate-600/70 px-3 py-2 hover:border-emerald-400/40 transition-colors duration-300">
-                                    <div class="text-slate-400">Bulletins validés</div>
-                                    <div class="heading text-sm text-emerald-300">128 / 128</div>
-                                </div>
-                                <div class="rounded-xl border border-slate-600/70 px-3 py-2 hover:border-emerald-400/40 transition-colors duration-300">
-                                    <div class="text-slate-400">Pénalités</div>
-                                    <div class="heading text-sm text-emerald-300">0</div>
-                                </div>
-                            </div>
+                                    <div class="grid grid-cols-3 gap-3 text-[11px] text-slate-200 mb-4">
+                                        <div class="rounded-xl border border-slate-600/70 px-3 py-2 hover:border-gold/40 transition-colors duration-300">
+                                            <div class="text-slate-400">Effectif</div>
+                                            <div class="heading text-sm text-slate-50">128</div>
+                                        </div>
+                                        <div class="rounded-xl border border-slate-600/70 px-3 py-2 hover:border-emerald-400/40 transition-colors duration-300">
+                                            <div class="text-slate-400">Bulletins validés</div>
+                                            <div class="heading text-sm text-emerald-300">128 / 128</div>
+                                        </div>
+                                        <div class="rounded-xl border border-slate-600/70 px-3 py-2 hover:border-emerald-400/40 transition-colors duration-300">
+                                            <div class="text-slate-400">Pénalités</div>
+                                            <div class="heading text-sm text-emerald-300">0</div>
+                                        </div>
+                                    </div>
 
-                            <div class="h-2 rounded-full bg-slate-700 overflow-hidden mb-2">
-                                <div class="h-full w-10/12 bg-gradient-to-r from-gold via-amber-300 to-yellow-200 relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+                                    <div class="h-2 rounded-full bg-slate-700 overflow-hidden mb-2">
+                                        <div class="h-full w-10/12 bg-gradient-to-r from-gold via-amber-300 to-yellow-200 relative overflow-hidden">
+                                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between text-[11px] text-slate-300">
+                                        <span>Taux de complétion</span>
+                                        <span class="font-semibold text-gold">92%</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex justify-between text-[11px] text-slate-300">
-                                <span>Taux de complétion</span>
-                                <span class="font-semibold text-gold">92%</span>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Visuel slide 2 -->
-                <div class="hero-slide-visual" data-slide="1">
-                    <div class="space-y-5">
-                        <div class="rounded-3xl overflow-hidden border border-slate-700/70 bg-slate-900/70 shadow-2xl">
-                            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1100&q=80"
-                                 alt="Tableau de bord finance & paie"
-                                 class="w-full h-60 object-cover">
-                            <div class="p-4 flex items-center justify-between">
-                                <div>
-                                    <p class="text-[11px] uppercase tracking-[0.18em] text-slate-300">
-                                        Simulation masse salariale
-                                    </p>
-                                    <p class="heading text-sm font-semibold text-slate-50">
-                                        Impact immédiat sur votre trésorerie
-                                    </p>
-                                </div>
-                                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/10 text-[10px] text-emerald-300 border border-emerald-500/40">
+                        <!-- Visuel slide 2 -->
+                        <div class="hero-slide-visual" data-slide="1">
+                            <div class="space-y-5">
+                                <div class="rounded-3xl overflow-hidden border border-slate-700/70 bg-slate-900/70 shadow-2xl">
+                                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1100&q=80"
+                                         alt="Tableau de bord finance & paie"
+                                         class="w-full h-60 object-cover">
+                                    <div class="p-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="text-[11px] uppercase tracking-[0.18em] text-slate-300">
+                                                Simulation masse salariale
+                                            </p>
+                                            <p class="heading text-sm font-semibold text-slate-50">
+                                                Impact immédiat sur votre trésorerie
+                                            </p>
+                                        </div>
+                                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/10 text-[10px] text-emerald-300 border border-emerald-500/40">
                                     <i class="fas fa-check-circle"></i> Validé
                                 </span>
+                                    </div>
+                                </div>
+
+                                <div class="card-glass rounded-3xl p-5 border border-slate-700/80">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div>
+                                            <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400">
+                                                CNPS / Fiscalité
+                                            </p>
+                                            <h3 class="heading text-base font-semibold text-slate-50">
+                                                Contrôle de cohérence automatisé
+                                            </h3>
+                                        </div>
+                                        <i class="fas fa-shield-alt text-gold text-lg"></i>
+                                    </div>
+
+                                    <ul class="text-[11px] text-slate-200 space-y-1.5">
+                                        <li class="flex items-center gap-2">
+                                            <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
+                                            <span>Vérification des plafonds et assiettes CNPS</span>
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
+                                            <span>Export des fichiers mensuels prêts à déposer</span>
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
+                                            <span>Alertes automatiques sur les deadlines</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="card-glass rounded-3xl p-5 border border-slate-700/80">
-                            <div class="flex items-center justify-between mb-3">
-                                <div>
-                                    <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                                        CNPS / Fiscalité
-                                    </p>
-                                    <h3 class="heading text-base font-semibold text-slate-50">
-                                        Contrôle de cohérence automatisé
-                                    </h3>
-                                </div>
-                                <i class="fas fa-shield-alt text-gold text-lg"></i>
-                            </div>
-
-                            <ul class="text-[11px] text-slate-200 space-y-1.5">
-                                <li class="flex items-center gap-2">
-                                    <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
-                                    <span>Vérification des plafonds et assiettes CNPS</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
-                                    <span>Export des fichiers mensuels prêts à déposer</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
-                                    <span>Alertes automatiques sur les deadlines</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Visuel slide 3 -->
-                <div class="hero-slide-visual" data-slide="2">
-                    <div class="space-y-5">
-                        <div class="rounded-3xl overflow-hidden border border-slate-700/70 bg-slate-900/70 shadow-2xl">
-                            <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=1100&q=80"
-                                 alt="Équipe de talents en entreprise"
-                                 class="w-full h-60 object-cover">
-                            <div class="p-4 flex items-center justify-between">
-                                <div>
-                                    <p class="text-[11px] uppercase tracking-[0.18em] text-slate-300">Pipeline candidats</p>
-                                    <p class="heading text-sm font-semibold text-slate-50">
-                                        Shortlist validée avec le client
-                                    </p>
-                                </div>
-                                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-500/10 text-[10px] text-sky-300 border border-sky-500/40">
+                        <!-- Visuel slide 3 -->
+                        <div class="hero-slide-visual" data-slide="2">
+                            <div class="space-y-5">
+                                <div class="rounded-3xl overflow-hidden border border-slate-700/70 bg-slate-900/70 shadow-2xl">
+                                    <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=1100&q=80"
+                                         alt="Équipe de talents en entreprise"
+                                         class="w-full h-60 object-cover">
+                                    <div class="p-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="text-[11px] uppercase tracking-[0.18em] text-slate-300">Pipeline
+                                                candidats</p>
+                                            <p class="heading text-sm font-semibold text-slate-50">
+                                                Shortlist validée avec le client
+                                            </p>
+                                        </div>
+                                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-500/10 text-[10px] text-sky-300 border border-sky-500/40">
                                     <i class="fas fa-users"></i> 18 candidats actifs
                                 </span>
-                            </div>
-                        </div>
-
-                        <div class="card-glass rounded-3xl p-5 border border-slate-700/80">
-                            <div class="flex items-center justify-between mb-3">
-                                <div>
-                                    <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                                        Parcours candidat
-                                    </p>
-                                    <h3 class="heading text-base font-semibold text-slate-50">
-                                        Expérience fluide & professionnelle
-                                    </h3>
+                                    </div>
                                 </div>
-                                <i class="fas fa-star text-gold text-lg"></i>
+
+                                <div class="card-glass rounded-3xl p-5 border border-slate-700/80">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div>
+                                            <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400">
+                                                Parcours candidat
+                                            </p>
+                                            <h3 class="heading text-base font-semibold text-slate-50">
+                                                Expérience fluide & professionnelle
+                                            </h3>
+                                        </div>
+                                        <i class="fas fa-star text-gold text-lg"></i>
+                                    </div>
+                                    <ul class="text-[11px] text-slate-200 space-y-1.5">
+                                        <li class="flex items-center gap-2">
+                                            <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
+                                            <span>Formulaire en ligne + upload CV & lettre</span>
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
+                                            <span>Email automatique de confirmation</span>
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
+                                            <span>Suivi des étapes : reçu, en entretien, retenu</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <ul class="text-[11px] text-slate-200 space-y-1.5">
-                                <li class="flex items-center gap-2">
-                                    <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
-                                    <span>Formulaire en ligne + upload CV & lettre</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
-                                    <span>Email automatique de confirmation</span>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
-                                    <span>Suivi des étapes : reçu, en entretien, retenu</span>
-                                </li>
-                            </ul>
                         </div>
                     </div>
+
+                </div>
+
+
+            </div>
+            <!-- CONTRÔLES SLIDER -->
+            <div class="mt-6 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-[11px] text-slate-200">
+                    <button id="hero-prev"
+                            class="w-8 h-8 rounded-full border border-slate-500/70 flex items-center justify-center hover:bg-slate-50/10 hover:border-gold/40 hover:scale-110 transition-all duration-300 active:scale-95">
+                        <i class="fas fa-chevron-left text-xs"></i>
+                    </button>
+                    <button id="hero-next"
+                            class="w-8 h-8 rounded-full border border-slate-500/70 flex items-center justify-center hover:bg-slate-50/10 hover:border-gold/40 hover:scale-110 transition-all duration-300 active:scale-95">
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+                <div id="hero-dots" class="flex items-center gap-2">
+                    <div class="hero-dot active" data-slide="0"></div>
+                    <div class="hero-dot" data-slide="1"></div>
+                    <div class="hero-dot" data-slide="2"></div>
                 </div>
             </div>
+        </section>
 
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const prevBtn = document.getElementById('hero-prev');
+                const nextBtn = document.getElementById('hero-next');
+                const dots = document.querySelectorAll('.hero-dot');
+                const heroSection = document.getElementById('home');
 
+                const textSlides = Array.from(document.querySelectorAll('.hero-text-col .hero-slide[data-slide]'));
+                const visualSlides = Array.from(document.querySelectorAll('.hero-visual-col .hero-slide-visual[data-slide]'));
 
-    </div>
-     <!-- CONTRÔLES SLIDER -->
-        <div class="mt-6 flex items-center justify-between">
-            <div class="flex items-center gap-2 text-[11px] text-slate-200">
-                <button id="hero-prev" class="w-8 h-8 rounded-full border border-slate-500/70 flex items-center justify-center hover:bg-slate-50/10 hover:border-gold/40 hover:scale-110 transition-all duration-300 active:scale-95">
-                    <i class="fas fa-chevron-left text-xs"></i>
-                </button>
-                <button id="hero-next" class="w-8 h-8 rounded-full border border-slate-500/70 flex items-center justify-center hover:bg-slate-50/10 hover:border-gold/40 hover:scale-110 transition-all duration-300 active:scale-95">
-                    <i class="fas fa-chevron-right text-xs"></i>
-                </button>
-            </div>
-            <div id="hero-dots" class="flex items-center gap-2">
-                <div class="hero-dot active" data-slide="0"></div>
-                <div class="hero-dot" data-slide="1"></div>
-                <div class="hero-dot" data-slide="2"></div>
-            </div>
-        </div>
-</section>
+                const totalSlides = textSlides.length;
+                let currentSlide = 0;
+                let slideInterval = null;
+                const AUTO_DELAY = 8000;
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const prevBtn = document.getElementById('hero-prev');
-    const nextBtn = document.getElementById('hero-next');
-    const dots = document.querySelectorAll('.hero-dot');
-    const heroSection = document.getElementById('home');
-
-    const textSlides = Array.from(document.querySelectorAll('.hero-text-col .hero-slide[data-slide]'));
-    const visualSlides = Array.from(document.querySelectorAll('.hero-visual-col .hero-slide-visual[data-slide]'));
-
-    const totalSlides = textSlides.length;
-    let currentSlide = 0;
-    let slideInterval = null;
-    const AUTO_DELAY = 8000;
-
-    // Animation shimmer
-    const style = document.createElement('style');
-    style.textContent = `
+                // Animation shimmer
+                const style = document.createElement('style');
+                style.textContent = `
         @keyframes shimmer {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
@@ -674,70 +703,70 @@ document.addEventListener('DOMContentLoaded', function () {
             animation: shimmer 2s infinite linear;
         }
     `;
-    document.head.appendChild(style);
+                document.head.appendChild(style);
 
-    function syncDots(idx) {
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === idx);
-        });
-    }
+                function syncDots(idx) {
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === idx);
+                    });
+                }
 
-    function showSlide(index) {
-        const newIndex = (index + totalSlides) % totalSlides;
-        if (newIndex === currentSlide) return;
+                function showSlide(index) {
+                    const newIndex = (index + totalSlides) % totalSlides;
+                    if (newIndex === currentSlide) return;
 
-        // Text
-        textSlides.forEach((slide, i) => {
-            slide.classList.toggle('hero-slide-active', i === newIndex);
-        });
+                    // Text
+                    textSlides.forEach((slide, i) => {
+                        slide.classList.toggle('hero-slide-active', i === newIndex);
+                    });
 
-        // Visuals (desktop only)
-        visualSlides.forEach((slide, i) => {
-            slide.classList.toggle('hero-slide-active', i === newIndex);
-        });
+                    // Visuals (desktop only)
+                    visualSlides.forEach((slide, i) => {
+                        slide.classList.toggle('hero-slide-active', i === newIndex);
+                    });
 
-        currentSlide = newIndex;
-        syncDots(currentSlide);
-    }
+                    currentSlide = newIndex;
+                    syncDots(currentSlide);
+                }
 
-    function next() {
-        showSlide(currentSlide + 1);
-    }
+                function next() {
+                    showSlide(currentSlide + 1);
+                }
 
-    function prev() {
-        showSlide(currentSlide - 1);
-    }
+                function prev() {
+                    showSlide(currentSlide - 1);
+                }
 
-    function startAuto() {
-        if (slideInterval) clearInterval(slideInterval);
-        slideInterval = setInterval(next, AUTO_DELAY);
-    }
+                function startAuto() {
+                    if (slideInterval) clearInterval(slideInterval);
+                    slideInterval = setInterval(next, AUTO_DELAY);
+                }
 
-    function stopAuto() {
-        if (slideInterval) clearInterval(slideInterval);
-    }
+                function stopAuto() {
+                    if (slideInterval) clearInterval(slideInterval);
+                }
 
-    // Events
-    if (prevBtn) prevBtn.addEventListener('click', prev);
-    if (nextBtn) nextBtn.addEventListener('click', next);
+                // Events
+                if (prevBtn) prevBtn.addEventListener('click', prev);
+                if (nextBtn) nextBtn.addEventListener('click', next);
 
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            const idx = parseInt(dot.dataset.slide || '0', 10);
-            showSlide(idx);
-        });
-    });
+                dots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        const idx = parseInt(dot.dataset.slide || '0', 10);
+                        showSlide(idx);
+                    });
+                });
 
-    if (heroSection) {
-        heroSection.addEventListener('mouseenter', stopAuto);
-        heroSection.addEventListener('mouseleave', startAuto);
-    }
+                if (heroSection) {
+                    heroSection.addEventListener('mouseenter', stopAuto);
+                    heroSection.addEventListener('mouseleave', startAuto);
+                }
 
-    // Init
-    syncDots(currentSlide);
-    startAuto();
-});
-</script>
+                // Init
+                syncDots(currentSlide);
+                startAuto();
+            });
+        </script>
 
 
         <!-- LOGOS CLIENTS -->
@@ -1310,191 +1339,196 @@ document.addEventListener('DOMContentLoaded', function () {
         </section>
 
         <!-- CONTACT -->
-       <section id="contact"
-         class="py-16 bg-slate-50 dark:bg-[#020617] border-t border-slate-200 dark:border-slate-800/80">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.05fr,0.95fr] gap-10 items-start">
-    <div class="reveal" data-delay="1">
-      <p class="text-[11px] uppercase tracking-[0.25em] text-gold mb-2">Contact</p>
-      <h2 class="heading text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
-        Prêt à externaliser votre fonction RH ?
-      </h2>
-      <p class="text-sm text-slate-700 dark:text-slate-300 mb-6">
-        Partagez-nous vos enjeux, nous construisons ensemble une solution d’externalisation RH & paie alignée sur la
-        taille, le secteur et l’ambition de votre entreprise.
-      </p>
+        <section id="contact"
+                 class="py-16 bg-slate-50 dark:bg-[#020617] border-t border-slate-200 dark:border-slate-800/80">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.05fr,0.95fr] gap-10 items-start">
+                <div class="reveal" data-delay="1">
+                    <p class="text-[11px] uppercase tracking-[0.25em] text-gold mb-2">Contact</p>
+                    <h2 class="heading text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
+                        Prêt à externaliser votre fonction RH ?
+                    </h2>
+                    <p class="text-sm text-slate-700 dark:text-slate-300 mb-6">
+                        Partagez-nous vos enjeux, nous construisons ensemble une solution d’externalisation RH & paie
+                        alignée sur la
+                        taille, le secteur et l’ambition de votre entreprise.
+                    </p>
 
-      <div class="space-y-5 text-sm text-slate-800 dark:text-slate-200">
-        <div class="flex items-start gap-3">
-          <div class="w-9 h-9 rounded-2xl bg-slate-100 flex items-center justify-center dark:bg-slate-900">
-            <i class="fas fa-location-dot text-gold text-sm"></i>
-          </div>
-          <div class="flex-1">
-            <div class="font-semibold text-slate-900 dark:text-slate-50">Adresse</div>
-            <div class="text-slate-700 dark:text-slate-300 text-xs">
-              Cocody route d’Abbata, carrefour Coqivoire avant Station Oryx, à gauche, en face de SIFO Energie
-            </div>
+                    <div class="space-y-5 text-sm text-slate-800 dark:text-slate-200">
+                        <div class="flex items-start gap-3">
+                            <div class="w-9 h-9 rounded-2xl bg-slate-100 flex items-center justify-center dark:bg-slate-900">
+                                <i class="fas fa-location-dot text-gold text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold text-slate-900 dark:text-slate-50">Adresse</div>
+                                <div class="text-slate-700 dark:text-slate-300 text-xs">
+                                    Cocody route d’Abbata, carrefour Coqivoire avant Station Oryx, à gauche, en face de
+                                    SIFO Energie
+                                </div>
 
-            <!-- ✅ Google Map -->
-            <div class="mt-3">
-              <div class="flex items-center justify-between gap-3 mb-2">
-                <div class="text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
-                  Localisation
+                                <!-- ✅ Google Map -->
+                                <div class="mt-3">
+                                    <div class="flex items-center justify-between gap-3 mb-2">
+                                        <div class="text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
+                                            Localisation
+                                        </div>
+                                        <a
+                                                class="text-[11px] font-semibold text-gold hover:underline"
+                                                target="_blank" rel="noopener"
+                                                href="https://www.google.com/maps/search/?api=1&query=Cocody%20route%20d%E2%80%99Abbata%20carrefour%20Coqivoire%20Station%20Oryx%20SIFO%20Energie%20Abidjan"
+                                        >
+                                            Itinéraire <i
+                                                class="fas fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="relative overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                                        <div class="aspect-[16/10] sm:aspect-[16/9]">
+                                            <iframe
+                                                    title="RH Partners Afric - Localisation"
+                                                    class="w-full h-full"
+                                                    loading="lazy"
+                                                    referrerpolicy="no-referrer-when-downgrade"
+                                                    src="https://www.google.com/maps?q=Cocody%20route%20d%E2%80%99Abbata%20carrefour%20Coqivoire%20Station%20Oryx%20SIFO%20Energie%20Abidjan&output=embed"
+                                                    style="border:0;"
+                                                    allowfullscreen=""
+                                            ></iframe>
+                                        </div>
+
+                                        <!-- léger voile pour dark mode -->
+                                        <div class="pointer-events-none absolute inset-0 hidden dark:block bg-black/10"></div>
+                                    </div>
+
+                                    <p class="mt-2 text-[11px] text-slate-500 dark:text-slate-400">
+                                        Astuce : cliquez sur “Itinéraire” pour ouvrir Google Maps.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div class="w-9 h-9 rounded-2xl bg-slate-100 flex items-center justify-center dark:bg-slate-900">
+                                <i class="fas fa-phone text-gold text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900 dark:text-slate-50">Téléphone</div>
+                                <div class="text-slate-700 dark:text-slate-300 text-xs">
+                                    (+225) 07 07 01 72 14 <br> (+225) 07 59 59 12 10 <br>
+                                    Lun – Ven : 8h00 – 18h00
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div class="w-9 h-9 rounded-2xl bg-slate-100 flex items-center justify-center dark:bg-slate-900">
+                                <i class="fas fa-envelope text-gold text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-900 dark:text-slate-50">Email</div>
+                                <div class="text-slate-700 dark:text-slate-300 text-xs">
+                                    contact@rhpartnersafric.com<br>
+                                    info@rhpartnersafric.com
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 mb-2">
+                                Réseaux
+                            </div>
+                            <div class="flex gap-3">
+                                <a href="#"
+                                   class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+                                    <i class="fab fa-linkedin-in text-sm"></i>
+                                </a>
+                                <a href="#"
+                                   class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+                                    <i class="fab fa-facebook-f text-sm"></i>
+                                </a>
+                                <a href="#"
+                                   class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+                                    <i class="fab fa-x-twitter text-sm"></i>
+                                </a>
+                                <a href="#"
+                                   class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+                                    <i class="fab fa-instagram text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <a
-                  class="text-[11px] font-semibold text-gold hover:underline"
-                  target="_blank" rel="noopener"
-                  href="https://www.google.com/maps/search/?api=1&query=Cocody%20route%20d%E2%80%99Abbata%20carrefour%20Coqivoire%20Station%20Oryx%20SIFO%20Energie%20Abidjan"
-                >
-                  Itinéraire <i class="fas fa-arrow-up-right-from-square text-[10px] ml-1"></i>
-                </a>
-              </div>
 
-              <div class="relative overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-                <div class="aspect-[16/10] sm:aspect-[16/9]">
-                  <iframe
-                    title="RH Partners Afric - Localisation"
-                    class="w-full h-full"
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps?q=Cocody%20route%20d%E2%80%99Abbata%20carrefour%20Coqivoire%20Station%20Oryx%20SIFO%20Energie%20Abidjan&output=embed"
-                    style="border:0;"
-                    allowfullscreen=""
-                  ></iframe>
+                <!-- Formulaire -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:card-glass dark:border-slate-700/80 reveal"
+                     data-delay="2">
+                    <h3 class="heading text-lg font-semibold text-slate-900 dark:text-slate-50 mb-4">
+                        Envoyer une demande
+                    </h3>
+
+                    {% if messages %}
+                        <div class="mb-3 text-[11px]">
+                            {% for message in messages %}
+                                <div class="mb-1 px-3 py-2 rounded-xl {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-300 dark:border-emerald-600/40{% else %}bg-slate-800 text-slate-100{% endif %}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <form method="post" class="space-y-4">
+                        {% csrf_token %}
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Nom
+                                    complet</label>
+                                {{ form.full_name }}
+                                {{ form.full_name.errors }}
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Entreprise</label>
+                                {{ form.company }}
+                                {{ form.company.errors }}
+                            </div>
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Email</label>
+                                {{ form.email }}
+                                {{ form.email.errors }}
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Téléphone</label>
+                                {{ form.phone }}
+                                {{ form.phone.errors }}
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Service
+                                souhaité</label>
+                            {{ form.service }}
+                            {{ form.service.errors }}
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Message</label>
+                            {{ form.message }}
+                            {{ form.message.errors }}
+                        </div>
+
+                        <div class="flex items-center gap-2 text-[11px] text-slate-600 dark:text-slate-300">
+                            {{ form.consent }}
+                            <span>{{ form.consent.label }}</span>
+                        </div>
+
+                        <button type="submit"
+                                class="w-full inline-flex justify-center items-center gap-2 px-4 py-2.5 rounded-full bg-gold text-nuit text-xs font-semibold shadow-soft-gold hover:bg-amber-300 transition">
+                            Envoyer ma demande
+                            <i class="fas fa-paper-plane text-[11px]"></i>
+                        </button>
+                    </form>
                 </div>
-
-                <!-- léger voile pour dark mode -->
-                <div class="pointer-events-none absolute inset-0 hidden dark:block bg-black/10"></div>
-              </div>
-
-              <p class="mt-2 text-[11px] text-slate-500 dark:text-slate-400">
-                Astuce : cliquez sur “Itinéraire” pour ouvrir Google Maps.
-              </p>
             </div>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-3">
-          <div class="w-9 h-9 rounded-2xl bg-slate-100 flex items-center justify-center dark:bg-slate-900">
-            <i class="fas fa-phone text-gold text-sm"></i>
-          </div>
-          <div>
-            <div class="font-semibold text-slate-900 dark:text-slate-50">Téléphone</div>
-            <div class="text-slate-700 dark:text-slate-300 text-xs">
-              (+225) 07 07 01 72 14 <br> (+225) 07 59 59 12 10 <br>
-              Lun – Ven : 8h00 – 18h00
-            </div>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-3">
-          <div class="w-9 h-9 rounded-2xl bg-slate-100 flex items-center justify-center dark:bg-slate-900">
-            <i class="fas fa-envelope text-gold text-sm"></i>
-          </div>
-          <div>
-            <div class="font-semibold text-slate-900 dark:text-slate-50">Email</div>
-            <div class="text-slate-700 dark:text-slate-300 text-xs">
-              contact@rhpartnersafric.com<br>
-              info@rhpartnersafric.com
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-4">
-          <div class="text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 mb-2">
-            Réseaux
-          </div>
-          <div class="flex gap-3">
-            <a href="#"
-               class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
-              <i class="fab fa-linkedin-in text-sm"></i>
-            </a>
-            <a href="#"
-               class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
-              <i class="fab fa-facebook-f text-sm"></i>
-            </a>
-            <a href="#"
-               class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
-              <i class="fab fa-x-twitter text-sm"></i>
-            </a>
-            <a href="#"
-               class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
-              <i class="fab fa-instagram text-sm"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Formulaire -->
-    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:card-glass dark:border-slate-700/80 reveal"
-         data-delay="2">
-      <h3 class="heading text-lg font-semibold text-slate-900 dark:text-slate-50 mb-4">
-        Envoyer une demande
-      </h3>
-
-      {% if messages %}
-        <div class="mb-3 text-[11px]">
-          {% for message in messages %}
-            <div class="mb-1 px-3 py-2 rounded-xl {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-300 dark:border-emerald-600/40{% else %}bg-slate-800 text-slate-100{% endif %}">
-              {{ message }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      <form method="post" class="space-y-4">
-        {% csrf_token %}
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Nom complet</label>
-            {{ form.full_name }}
-            {{ form.full_name.errors }}
-          </div>
-          <div>
-            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Entreprise</label>
-            {{ form.company }}
-            {{ form.company.errors }}
-          </div>
-        </div>
-
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Email</label>
-            {{ form.email }}
-            {{ form.email.errors }}
-          </div>
-          <div>
-            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Téléphone</label>
-            {{ form.phone }}
-            {{ form.phone.errors }}
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Service souhaité</label>
-          {{ form.service }}
-          {{ form.service.errors }}
-        </div>
-
-        <div>
-          <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Message</label>
-          {{ form.message }}
-          {{ form.message.errors }}
-        </div>
-
-        <div class="flex items-center gap-2 text-[11px] text-slate-600 dark:text-slate-300">
-          {{ form.consent }}
-          <span>{{ form.consent.label }}</span>
-        </div>
-
-        <button type="submit"
-                class="w-full inline-flex justify-center items-center gap-2 px-4 py-2.5 rounded-full bg-gold text-nuit text-xs font-semibold shadow-soft-gold hover:bg-amber-300 transition">
-          Envoyer ma demande
-          <i class="fas fa-paper-plane text-[11px]"></i>
-        </button>
-      </form>
-    </div>
-  </div>
-</section>
+        </section>
     </main>
 {% endblock %}
