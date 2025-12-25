@@ -3,200 +3,186 @@
 <!DOCTYPE html>
 <html lang="fr" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RH Partners Afric | Externalisation RH & Paie</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
-          rel="stylesheet">
+  <!-- Title (SEO) -->
+  <title>RH Partners Afric | Externalisation RH, Paie & Intérim</title>
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- SEO: Description & Keywords -->
+  <meta name="description" content="RH Partners Afric accompagne les entreprises en externalisation RH & paie, recrutement, intérim, conseil RH, formation, coaching et leadership. Solutions fiables, conformes et sur mesure.">
+  <meta name="keywords" content="RH Partners Afric, externalisation RH, paie externalisée, recrutement, intérim, travail temporaire, sous-traitance, conseil RH, formation FDFP, coaching, leadership, Côte d’Ivoire, Afrique de l’Ouest">
+  <meta name="author" content="RH Partners Afric">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        nuit: '#051536',
-                        gold: '#ffa600',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        heading: ['Poppins', 'system-ui', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        'soft-gold': '0 18px 45px rgba(255,166,0,0.18)',
-                    },
-                }
-            }
+  <!-- Canonical (IMPORTANT) -->
+  <link rel="canonical" href="https://rhpartnersafric.com/">
+
+  <!-- Geo / Language -->
+  <meta http-equiv="content-language" content="fr">
+  <meta name="language" content="French">
+  <meta property="og:locale" content="fr_FR">
+  <!-- hreflang (si tu as plusieurs langues) -->
+  <link rel="alternate" href="https://rhpartnersafric.com/" hreflang="fr">
+  <link rel="alternate" href="https://rhpartnersafric.com/en/" hreflang="en">
+  <link rel="alternate" href="https://rhpartnersafric.com/" hreflang="x-default">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+
+  <!-- Theme / PWA -->
+  <meta name="theme-color" content="#051536">
+  <meta name="color-scheme" content="light dark">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="application-name" content="RH Partners Afric">
+  <meta name="apple-mobile-web-app-title" content="RH Partners Afric">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
+  <meta property="og:site_name" content="RH Partners Afric">
+  <meta property="og:title" content="RH Partners Afric | Externalisation RH & Paie">
+  <meta property="og:description" content="Externalisation RH & paie, recrutement, intérim, conseil RH, formation, coaching et leadership. Des solutions conformes et sur mesure.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rhpartnersafric.com/">
+  <meta property="og:image" content="https://rhpartnersafric.com/assets/og/rhpartners-preview.png">
+  <meta property="og:image:secure_url" content="https://rhpartnersafric.com/assets/og/rhpartners-preview.png">
+  <meta property="og:image:alt" content="RH Partners Afric — Externalisation RH & Paie">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RH Partners Afric | Externalisation RH & Paie">
+  <meta name="twitter:description" content="Recrutement, intérim, conseil RH, formation, coaching, leadership & paie externalisée.">
+  <meta name="twitter:image" content="https://rhpartnersafric.com/assets/og/rhpartners-preview.png">
+  <meta name="twitter:image:alt" content="RH Partners Afric — Externalisation RH & Paie">
+  <!-- Optionnel -->
+  <!-- <meta name="twitter:site" content="@RHPartnersAfric"> -->
+
+  <!-- Rich Results: JSON-LD (Organization + WebSite + Services) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://rhpartnersafric.com/#organization",
+        "name": "RH Partners Afric",
+        "url": "https://rhpartnersafric.com/",
+        "logo": "https://rhpartnersafric.com/assets/brand/logo.png",
+        "image": "https://rhpartnersafric.com/assets/og/rhpartners-preview.png",
+        "description": "Externalisation RH & paie, recrutement, intérim, conseil RH, formation, coaching et leadership.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "CI"
+        },
+        "areaServed": ["CI", "Afrique de l’Ouest"],
+        "sameAs": [
+          "https://www.linkedin.com/company/rhpartnersafric"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://rhpartnersafric.com/#website",
+        "url": "https://rhpartnersafric.com/",
+        "name": "RH Partners Afric",
+        "publisher": {
+          "@id": "https://rhpartnersafric.com/#organization"
+        },
+        "inLanguage": "fr",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://rhpartnersafric.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
         }
-    </script>
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://rhpartnersafric.com/#localbusiness",
+        "name": "RH Partners Afric",
+        "url": "https://rhpartnersafric.com/",
+        "image": "https://rhpartnersafric.com/assets/og/rhpartners-preview.png",
+        "telephone": "+22500000000",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "CI"
+        },
+        "priceRange": "F CFA",
+        "openingHoursSpecification": [
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00" }
+        ]
+      },
+      {
+        "@type": "Service",
+        "name": "Externalisation RH & Paie",
+        "provider": { "@id": "https://rhpartnersafric.com/#organization" },
+        "areaServed": ["CI", "Afrique de l’Ouest"],
+        "serviceType": ["Paie externalisée","Administration du personnel","Conformité sociale"]
+      },
+      {
+        "@type": "Service",
+        "name": "Recrutement & Sélection",
+        "provider": { "@id": "https://rhpartnersafric.com/#organization" },
+        "areaServed": ["CI", "Afrique de l’Ouest"],
+        "serviceType": ["Sourcing","Évaluation","Intégration","Garantie de remplacement"]
+      },
+      {
+        "@type": "Service",
+        "name": "Intérim / Travail Temporaire",
+        "provider": { "@id": "https://rhpartnersafric.com/#organization" },
+        "areaServed": ["CI", "Afrique de l’Ouest"],
+        "serviceType": ["Mise à disposition","Gestion administrative","Suivi social et médical"]
+      },
+      {
+        "@type": "Service",
+        "name": "Conseil RH, Coaching & Leadership",
+        "provider": { "@id": "https://rhpartnersafric.com/#organization" },
+        "areaServed": ["CI", "Afrique de l’Ouest"],
+        "serviceType": ["Audit RH","Conseil","Coaching","Développement du leadership"]
+      }
+    ]
+  }
+  </script>
 
-    <style>
-        * {
-            scroll-behavior: smooth;
-        }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-        }
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        .heading {
-            font-family: 'Poppins', system-ui, sans-serif;
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { nuit: '#051536', gold: '#ffa600' },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            heading: ['Poppins', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: { 'soft-gold': '0 18px 45px rgba(255,166,0,0.18)' },
         }
+      }
+    }
+  </script>
 
-        .hero-bg {
-            position: relative;
-            background: radial-gradient(circle at 10% -10%, rgba(255, 166, 0, 0.18), transparent 55%),
-            radial-gradient(circle at 80% 110%, rgba(255, 166, 0, 0.12), transparent 55%),
-            linear-gradient(135deg, #020617, #051536);
-        }
-
-        .hero-bg::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            opacity: 0.18;
-            background-image: radial-gradient(circle at 0 0, #ffa600 0, transparent 55%),
-            radial-gradient(circle at 100% 100%, #ffa600 0, transparent 55%);
-            mix-blend-mode: screen;
-        }
-
-        .badge-pill {
-            border-radius: 999px;
-            border: 1px solid rgba(249, 250, 251, 0.18);
-            background: radial-gradient(circle at 0 0, rgba(255, 166, 0, 0.2), transparent 55%);
-        }
-
-        .stat-pill {
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.35);
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.65));
-        }
-
-        .light .stat-pill {
-            background: linear-gradient(135deg, rgba(248, 250, 252, 0.95), rgba(241, 245, 249, 0.95));
-            border-color: rgba(148, 163, 184, 0.45);
-        }
-
-        .nav-link {
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -6px;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(to right, #ffa600, #fde68a);
-            transition: width 0.25s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .card-glass {
-            backdrop-filter: blur(18px);
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.82));
-            border: 1px solid rgba(148, 163, 184, 0.25);
-        }
-
-        .card-light {
-            backdrop-filter: blur(18px);
-            background: rgba(255, 255, 255, 0.96);
-            border: 1px solid rgba(148, 163, 184, 0.25);
-        }
-
-        .service-card, .pricing-card, .faq-item {
-            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-        }
-
-        .service-card:hover,
-        .pricing-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.2);
-            border-color: rgba(255, 166, 0, 0.7);
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        /* Révélations au scroll */
-        .reveal {
-            opacity: 0;
-            transform: translateY(24px) scale(0.98);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .reveal[data-delay="1"] {
-            transition-delay: 0.1s;
-        }
-
-        .reveal[data-delay="2"] {
-            transition-delay: 0.2s;
-        }
-
-        .reveal[data-delay="3"] {
-            transition-delay: 0.3s;
-        }
-
-        .reveal[data-delay="4"] {
-            transition-delay: 0.4s;
-        }
-
-        .pulse-gold {
-            box-shadow: 0 0 0 0 rgba(255, 166, 0, 0.6);
-            animation: pulse-gold 1.8s infinite;
-        }
-
-        @keyframes pulse-gold {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 166, 0, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 14px rgba(255, 166, 0, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 166, 0, 0);
-            }
-        }
-
-        .step-line::before {
-            content: "";
-            position: absolute;
-            left: 18px;
-            top: 0;
-            bottom: 0;
-            border-left: 1px dashed rgba(148, 163, 184, 0.6);
-        }
-    </style>
+  <style>
+    * { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .heading { font-family: 'Poppins', system-ui, sans-serif; }
+    /* ... tes styles existants ... */
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-[#020817] dark:text-slate-100">
 
