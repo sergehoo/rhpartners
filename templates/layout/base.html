@@ -1,10 +1,402 @@
+{##/Users/ogahserge/Documents/rhpartnersafric/templates/layout/base.html#}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RH Partners Afric | Externalisation RH & Paie</title>
 
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        nuit: '#051536',
+                        gold: '#ffa600',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        heading: ['Poppins', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft-gold': '0 18px 45px rgba(255,166,0,0.18)',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .heading {
+            font-family: 'Poppins', system-ui, sans-serif;
+        }
+
+        .hero-bg {
+            position: relative;
+            background: radial-gradient(circle at 10% -10%, rgba(255, 166, 0, 0.18), transparent 55%),
+            radial-gradient(circle at 80% 110%, rgba(255, 166, 0, 0.12), transparent 55%),
+            linear-gradient(135deg, #020617, #051536);
+        }
+
+        .hero-bg::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.18;
+            background-image: radial-gradient(circle at 0 0, #ffa600 0, transparent 55%),
+            radial-gradient(circle at 100% 100%, #ffa600 0, transparent 55%);
+            mix-blend-mode: screen;
+        }
+
+        .badge-pill {
+            border-radius: 999px;
+            border: 1px solid rgba(249, 250, 251, 0.18);
+            background: radial-gradient(circle at 0 0, rgba(255, 166, 0, 0.2), transparent 55%);
+        }
+
+        .stat-pill {
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.65));
+        }
+
+        .light .stat-pill {
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.95), rgba(241, 245, 249, 0.95));
+            border-color: rgba(148, 163, 184, 0.45);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #ffa600, #fde68a);
+            transition: width 0.25s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .card-glass {
+            backdrop-filter: blur(18px);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.82));
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .card-light {
+            backdrop-filter: blur(18px);
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .service-card, .pricing-card, .faq-item {
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+
+        .service-card:hover,
+        .pricing-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.2);
+            border-color: rgba(255, 166, 0, 0.7);
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Révélations au scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px) scale(0.98);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .reveal[data-delay="1"] {
+            transition-delay: 0.1s;
+        }
+
+        .reveal[data-delay="2"] {
+            transition-delay: 0.2s;
+        }
+
+        .reveal[data-delay="3"] {
+            transition-delay: 0.3s;
+        }
+
+        .reveal[data-delay="4"] {
+            transition-delay: 0.4s;
+        }
+
+        .pulse-gold {
+            box-shadow: 0 0 0 0 rgba(255, 166, 0, 0.6);
+            animation: pulse-gold 1.8s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 166, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 14px rgba(255, 166, 0, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 166, 0, 0);
+            }
+        }
+
+        .step-line::before {
+            content: "";
+            position: absolute;
+            left: 18px;
+            top: 0;
+            bottom: 0;
+            border-left: 1px dashed rgba(148, 163, 184, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-[#020817] dark:text-slate-100">
+
+<!-- NAVBAR -->
+{% include "layout/nav.html" %}
+{% block content %}
+{% endblock %}
+
+<!-- FOOTER -->
+<footer class="bg-slate-900 border-t border-slate-800/80 py-5 dark:bg-[#020617]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
+        <div class="flex items-center gap-2">
+            <span class="heading font-semibold text-slate-100">RH Partners <span class="text-gold">Afric</span></span>
+            <span class="hidden sm:inline text-slate-500">• Externalisation RH & Paie</span>
+        </div>
+        <div class="flex flex-wrap gap-3 items-center">
+            <a href="#" class="hover:text-gold">Mentions légales</a>
+            <a href="#" class="hover:text-gold">Politique de confidentialité</a>
+            <span class="text-slate-500">&copy; <span id="year"></span> RH Partners Afric. Tous droits réservés.</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // YEAR
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+    }
+
+    // THEME
+    const htmlEl = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('theme-icon-sun');
+    const moonIcon = document.getElementById('theme-icon-moon');
+
+    function setTheme(mode) {
+        if (mode === 'light') {
+            htmlEl.classList.remove('dark');
+            htmlEl.classList.add('light');
+            localStorage.setItem('theme', 'light');
+            if (sunIcon && moonIcon) {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        } else {
+            htmlEl.classList.add('dark');
+            htmlEl.classList.remove('light');
+            localStorage.setItem('theme', 'dark');
+            if (sunIcon && moonIcon) {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+        }
+    }
+
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+        setTheme(storedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+    } else {
+        setTheme('light');
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            if (htmlEl.classList.contains('dark')) setTheme('light');
+            else setTheme('dark');
+        });
+    }
+
+    // MOBILE MENU
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    if (btn && menu) {
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+    }
+
+    // SMOOTH SCROLL ANCHORS
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const href = a.getAttribute('href');
+            if (!href || href === '#') return;
+            const target = document.querySelector(href);
+            if (!target) return;
+            e.preventDefault();
+            const offset = 72;
+            const top = target.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({top, behavior: 'smooth'});
+            if (menu && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        });
+    });
+
+    // SCROLL REVEAL
+    const revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {threshold: 0.15});
+
+        revealEls.forEach(el => observer.observe(el));
+    }
+</script>
+
+<!-- pour le slider -->
+{#<script>#}
+{#    // HERO SLIDER#}
+{#    (function () {#}
+{#        const slider = document.getElementById("hero-slider");#}
+{#        if (!slider) return;#}
+{##}
+{#        const slides = Array.from(slider.querySelectorAll(".hero-slide"))#}
+{#            .filter((el, idx) => idx % 2 === 0); // colonnes texte seulement#}
+{##}
+{#        const textSlides = slides; // pour clarté#}
+{#        const visualSlides = Array.from(slider.querySelectorAll(".hero-slide-visual"));#}
+{##}
+{#        const prevBtn = document.getElementById("hero-prev");#}
+{#        const nextBtn = document.getElementById("hero-next");#}
+{#        const dotsContainer = document.getElementById("hero-dots");#}
+{##}
+{#        let current = 0;#}
+{#        let timer = null;#}
+{#        const AUTO_DELAY = 8000;#}
+{##}
+{#        // Dots#}
+{#        const dots = textSlides.map((_, idx) => {#}
+{#            const btn = document.createElement("button");#}
+{#            btn.type = "button";#}
+{#            btn.className = "w-2.5 h-2.5 rounded-full border border-slate-400/80 bg-slate-900/40 dark:bg-nuit/40 transition-all";#}
+{#            btn.setAttribute("data-index", idx);#}
+{#            dotsContainer.appendChild(btn);#}
+{#            return btn;#}
+{#        });#}
+{##}
+{#        function updateSlides() {#}
+{#            textSlides.forEach((slide, idx) => {#}
+{#                slide.classList.toggle("hero-slide-active", idx === current);#}
+{#            });#}
+{#            visualSlides.forEach((slide, idx) => {#}
+{#                slide.classList.toggle("hero-slide-active", idx === current);#}
+{#            });#}
+{#            dots.forEach((dot, idx) => {#}
+{#                dot.className =#}
+{#                    "w-2.5 h-2.5 rounded-full transition-all " +#}
+{#                    (idx === current#}
+{#                        ? "bg-gold border-gold scale-110"#}
+{#                        : "border-slate-400/80 bg-slate-900/40 dark:bg-nuit/40");#}
+{#            });#}
+{#        }#}
+{##}
+{#        function goTo(index) {#}
+{#            current = (index + textSlides.length) % textSlides.length;#}
+{#            updateSlides();#}
+{#            restartTimer();#}
+{#        }#}
+{##}
+{#        function next() {#}
+{#            goTo(current + 1);#}
+{#        }#}
+{##}
+{#        function prev() {#}
+{#            goTo(current - 1);#}
+{#        }#}
+{##}
+{#        function restartTimer() {#}
+{#            if (timer) clearInterval(timer);#}
+{#            timer = setInterval(next, AUTO_DELAY);#}
+{#        }#}
+{##}
+{#        // Events#}
+{#        if (nextBtn) nextBtn.addEventListener("click", next);#}
+{#        if (prevBtn) prevBtn.addEventListener("click", prev);#}
+{#        dots.forEach(dot => {#}
+{#            dot.addEventListener("click", () => {#}
+{#                const idx = parseInt(dot.getAttribute("data-index") || "0", 10);#}
+{#                goTo(idx);#}
+{#            });#}
+{#        });#}
+{##}
+{#        slider.addEventListener("mouseenter", () => {#}
+{#            if (timer) clearInterval(timer);#}
+{#        });#}
+{#        slider.addEventListener("mouseleave", () => {#}
+{#            restartTimer();#}
+{#        });#}
+{##}
+{#        // Init#}
+{#        updateSlides();#}
+{#        restartTimer();#}
+{#    })();#}
+{#</script>#}
 </body>
 </html>

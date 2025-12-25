@@ -1,10 +1,1212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RH Partners Afric | Externalisation RH & Paie</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        nuit: '#051536',
+                        gold: '#ffa600',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        heading: ['Poppins', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft-gold': '0 18px 45px rgba(255,166,0,0.18)',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .heading {
+            font-family: 'Poppins', system-ui, sans-serif;
+        }
+
+        .hero-bg {
+            position: relative;
+            background: radial-gradient(circle at 10% -10%, rgba(255, 166, 0, 0.18), transparent 55%),
+            radial-gradient(circle at 80% 110%, rgba(255, 166, 0, 0.12), transparent 55%),
+            linear-gradient(135deg, #020617, #051536);
+        }
+
+        .hero-bg::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.18;
+            background-image: radial-gradient(circle at 0 0, #ffa600 0, transparent 55%),
+            radial-gradient(circle at 100% 100%, #ffa600 0, transparent 55%);
+            mix-blend-mode: screen;
+        }
+
+        .badge-pill {
+            border-radius: 999px;
+            border: 1px solid rgba(249, 250, 251, 0.18);
+            background: radial-gradient(circle at 0 0, rgba(255, 166, 0, 0.2), transparent 55%);
+        }
+
+        .stat-pill {
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.65));
+        }
+
+        .light .stat-pill {
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.95), rgba(241, 245, 249, 0.95));
+            border-color: rgba(148, 163, 184, 0.45);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #ffa600, #fde68a);
+            transition: width 0.25s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .card-glass {
+            backdrop-filter: blur(18px);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.82));
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .card-light {
+            backdrop-filter: blur(18px);
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .service-card, .pricing-card, .faq-item {
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+
+        .service-card:hover,
+        .pricing-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.2);
+            border-color: rgba(255, 166, 0, 0.7);
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Révélations au scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px) scale(0.98);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .reveal[data-delay="1"] {
+            transition-delay: 0.1s;
+        }
+
+        .reveal[data-delay="2"] {
+            transition-delay: 0.2s;
+        }
+
+        .reveal[data-delay="3"] {
+            transition-delay: 0.3s;
+        }
+
+        .reveal[data-delay="4"] {
+            transition-delay: 0.4s;
+        }
+
+        .pulse-gold {
+            box-shadow: 0 0 0 0 rgba(255, 166, 0, 0.6);
+            animation: pulse-gold 1.8s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 166, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 14px rgba(255, 166, 0, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 166, 0, 0);
+            }
+        }
+
+        .step-line::before {
+            content: "";
+            position: absolute;
+            left: 18px;
+            top: 0;
+            bottom: 0;
+            border-left: 1px dashed rgba(148, 163, 184, 0.6);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900 dark:bg-[#020817] dark:text-slate-100">
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 inset-x-0 z-40 bg-white/90 border-b border-slate-200/80 backdrop-blur dark:bg-nuit/90 dark:border-slate-800/70">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="#home" class="flex items-center gap-2">
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-gold to-amber-300 flex items-center justify-center shadow-soft-gold">
+                <i class="fas fa-users text-nuit text-xl"></i>
+            </div>
+            <div class="leading-tight">
+                <div class="heading font-semibold text-sm sm:text-base text-slate-900 dark:text-slate-50">
+                    RH Partners <span class="text-gold">Afric</span>
+                </div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-[0.25em] hidden sm:block">
+                    Externalisation RH & Paie
+                </div>
+            </div>
+        </a>
+
+        <div class="hidden lg:flex items-center gap-8 text-xs sm:text-sm">
+            <a href="#home" class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Accueil</a>
+            <a href="#about" class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">À propos</a>
+            <a href="#services"
+               class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Services</a>
+            <a href="#process"
+               class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Processus</a>
+            <a href="#pricing" class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Tarifs</a>
+            <a href="#testimonials" class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Témoignages</a>
+            <a href="#faq" class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">FAQ</a>
+            <a href="#contact"
+               class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <!-- Theme toggle -->
+            <button id="theme-toggle"
+                    class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-700 flex items-center justify-center text-sm shadow-sm hover:bg-slate-100 transition dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
+                    aria-label="Changer de thème">
+                <i id="theme-icon-sun" class="fas fa-sun text-gold hidden"></i>
+                <i id="theme-icon-moon" class="fas fa-moon"></i>
+            </button>
+
+            <a href="#contact"
+               class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold text-nuit text-xs font-semibold shadow-soft-gold hover:-translate-y-[1px] transition">
+                <span>Parler à un consultant</span>
+                <i class="fas fa-arrow-right text-[11px]"></i>
+            </a>
+
+            <button id="mobile-menu-btn" class="lg:hidden text-slate-800 dark:text-slate-100">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu"
+         class="lg:hidden hidden border-t border-slate-200 bg-white/95 dark:border-slate-800 dark:bg-nuit/95">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-3 text-sm">
+            <a href="#home" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Accueil</a>
+            <a href="#about" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">À propos</a>
+            <a href="#services" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Services</a>
+            <a href="#process" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Processus</a>
+            <a href="#pricing" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Tarifs</a>
+            <a href="#testimonials"
+               class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Témoignages</a>
+            <a href="#faq" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">FAQ</a>
+            <a href="#contact" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Contact</a>
+            <a href="#contact"
+               class="mt-2 inline-flex justify-center px-4 py-2 rounded-full bg-gold text-nuit text-xs font-semibold shadow-soft-gold">
+                Demander un devis
+            </a>
+        </div>
+    </div>
+</nav>
+
+<main id="home" class="pt-20">
+
+    <!-- HERO -->
+    <section class="hero-bg relative text-slate-50 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="w-[500px] h-[500px] rounded-full bg-gold blur-3xl -top-40 -left-40 absolute"></div>
+            <div class="w-[450px] h-[450px] rounded-full bg-gold/60 blur-3xl bottom-[-220px] right-[-160px] absolute"></div>
+        </div>
+
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-[1.1fr,0.9fr] gap-12 items-center">
+            <!-- Texte -->
+            <div class="space-y-7 reveal" data-delay="1">
+                <div class="badge-pill inline-flex items-center gap-2 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-slate-200">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Cabinet RH & Paie – Afrique
+                </div>
+
+                <h1 class="heading text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+                    Externalisez vos <span class="text-gold">Ressources Humaines</span>
+                    <br class="hidden sm:block">
+                    et sécurisez votre <span class="text-slate-50">paie.</span>
+                </h1>
+
+                <p class="text-sm sm:text-base text-slate-200 max-w-xl">
+                    RH Partners Afric prend en charge votre fonction RH (paie, administration, recrutement, création
+                    d’entreprise)
+                    pour que vous puissiez vous concentrer sur votre cœur de métier, en toute conformité CNPS & fiscale.
+                </p>
+
+                <div class="flex flex-wrap gap-3">
+                    <a href="#contact"
+                       class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold text-nuit text-sm font-semibold shadow-soft-gold hover:-translate-y-[1px] transition pulse-gold">
+                        <span>Planifier un rendez-vous</span>
+                        <i class="fas fa-calendar-check text-xs"></i>
+                    </a>
+                    <a href="#services"
+                       class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-slate-200/60 text-sm text-slate-100 hover:bg-slate-50/5 transition">
+                        <i class="fas fa-layer-group text-xs text-gold"></i>
+                        <span>Découvrir nos solutions</span>
+                    </a>
+                </div>
+
+                <div class="flex flex-wrap gap-5 pt-4 text-[11px] sm:text-xs text-slate-200">
+                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                        <span class="heading text-lg font-semibold text-gold">50+</span>
+                        <span>entreprises accompagnées</span>
+                    </div>
+                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                        <span class="heading text-lg font-semibold text-gold">10k+</span>
+                        <span>bulletins de paie / an</span>
+                    </div>
+                    <div class="stat-pill px-4 py-2 flex items-center gap-2">
+                        <span class="heading text-lg font-semibold text-gold">0</span>
+                        <span>pénalité CNPS déclarée</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image + mini-dashboard -->
+            <div class="space-y-5 reveal" data-delay="2">
+                <div class="rounded-3xl overflow-hidden border border-slate-700/70 bg-slate-900/70 shadow-2xl floating">
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1100&q=80"
+                         alt="Réunion d'équipe RH"
+                         class="w-full h-60 object-cover">
+                    <div class="p-4 flex items-center justify-between">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.18em] text-slate-300">Équipe dédiée</p>
+                            <p class="heading text-sm font-semibold text-slate-50">Experts RH & Paie UEMOA</p>
+                        </div>
+                        <div class="flex -space-x-2">
+              <span class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-[11px] text-nuit font-semibold border border-slate-300">
+                RH
+              </span>
+                            <span class="w-7 h-7 rounded-full bg-gold flex items-center justify-center text-[11px] text-nuit font-semibold border border-amber-200">
+                P
+              </span>
+                            <span class="w-7 h-7 rounded-full bg-slate-900 flex items-center justify-center text-[11px] text-gold font-semibold border border-slate-500">
+                +
+              </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-glass rounded-3xl p-5 relative overflow-hidden border border-slate-700/80">
+                    <div class="absolute -top-16 -right-10 w-32 h-32 rounded-full bg-gold/20 blur-3xl"></div>
+
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400">
+                                Synthèse paie – ce mois
+                            </p>
+                            <h3 class="heading text-base font-semibold text-slate-50">
+                                Tableau de bord RH & Paie
+                            </h3>
+                        </div>
+                        <span class="inline-flex items-center gap-1 px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-gold bg-nuit/60 rounded-full border border-slate-600">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Temps réel
+            </span>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-3 text-[11px] text-slate-200 mb-4">
+                        <div class="rounded-xl border border-slate-600/70 px-3 py-2">
+                            <div class="text-slate-400">Effectif</div>
+                            <div class="heading text-sm text-slate-50">128</div>
+                        </div>
+                        <div class="rounded-xl border border-slate-600/70 px-3 py-2">
+                            <div class="text-slate-400">Bulletins validés</div>
+                            <div class="heading text-sm text-emerald-300">128 / 128</div>
+                        </div>
+                        <div class="rounded-xl border border-slate-600/70 px-3 py-2">
+                            <div class="text-slate-400">Pénalités</div>
+                            <div class="heading text-sm text-emerald-300">0</div>
+                        </div>
+                    </div>
+
+                    <div class="h-2 rounded-full bg-slate-700 overflow-hidden mb-2">
+                        <div class="h-full w-10/12 bg-gradient-to-r from-gold via-amber-300 to-yellow-200"></div>
+                    </div>
+                    <div class="flex justify-between text-[11px] text-slate-300">
+                        <span>Taux de complétion</span>
+                        <span>92%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOGOS CLIENTS -->
+    <section class="py-8 bg-white border-b border-slate-200 dark:bg-nuit dark:border-slate-800/70">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 mb-3 text-center">
+                Ils nous font confiance
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 opacity-80 text-slate-500 dark:text-slate-400 text-xs">
+        <span class="flex items-center gap-2">
+          <i class="fas fa-building"></i> Tech Solutions
+        </span>
+                <span class="flex items-center gap-2">
+          <i class="fas fa-leaf"></i> Agro Industries
+        </span>
+                <span class="flex items-center gap-2">
+          <i class="fas fa-hand-holding-dollar"></i> Financia Group
+        </span>
+                <span class="flex items-center gap-2">
+          <i class="fas fa-stethoscope"></i> SantéPlus Clinics
+        </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about"
+             class="bg-slate-50 dark:bg-[#020617] py-16 lg:py-20 border-b border-slate-200 dark:border-slate-800/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-start">
+            <div class="reveal" data-delay="1">
+                <p class="text-[11px] uppercase tracking-[0.25em] text-gold mb-2">À propos</p>
+                <h2 class="heading text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-4">
+                    RH Partners Afric, votre service RH externalisé.
+                </h2>
+                <p class="text-sm text-slate-700 dark:text-slate-300 mb-3">
+                    RH Partners Afric est un cabinet spécialisé dans la gestion externalisée des Ressources
+                    Humaines et de la paie pour les entreprises africaines, de la start-up au grand groupe.
+                </p>
+                <p class="text-sm text-slate-700 dark:text-slate-300 mb-6">
+                    Nous combinons expertise juridique, maîtrise opérationnelle et outils digitaux pour offrir un
+                    accompagnement de bout en bout : recrutement, administration du personnel, paie,
+                    développement des compétences et conformité réglementaire.
+                </p>
+
+                <div class="grid sm:grid-cols-3 gap-3 text-xs mb-6">
+                    <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 dark:border-slate-700/80 dark:bg-slate-900/60">
+                        <div class="heading text-lg font-semibold text-gold">10+</div>
+                        <div class="text-slate-700 dark:text-slate-300">années d’expertise cumulée</div>
+                    </div>
+                    <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 dark:border-slate-700/80 dark:bg-slate-900/60">
+                        <div class="heading text-lg font-semibold text-gold">1 000+</div>
+                        <div class="text-slate-700 dark:text-slate-300">collaborateurs suivis</div>
+                    </div>
+                    <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 dark:border-slate-700/80 dark:bg-slate-900/60">
+                        <div class="heading text-lg font-semibold text-gold">0</div>
+                        <div class="text-slate-700 dark:text-slate-300">pénalité liée à la paie</div>
+                    </div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-4 text-xs">
+                    <div class="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-700/70 dark:bg-slate-900/80">
+                        <h3 class="heading text-base font-semibold text-slate-900 dark:text-slate-50 mb-2">Notre
+                            mission</h3>
+                        <p class="text-slate-700 dark:text-slate-300">
+                            Permettre aux entreprises de disposer d’une fonction RH structurée, conforme et performante,
+                            sans supporter la charge fixe d’un service interne complet.
+                        </p>
+                    </div>
+                    <div class="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-700/70 dark:bg-slate-900/80">
+                        <h3 class="heading text-base font-semibold text-slate-900 dark:text-slate-50 mb-2">Nos
+                            valeurs</h3>
+                        <ul class="text-slate-700 dark:text-slate-300 space-y-1.5">
+                            <li>• Confidentialité & intégrité des données</li>
+                            <li>• Rigueur juridique & conformité</li>
+                            <li>• Proximité & transparence</li>
+                            <li>• Engagement durable</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image + mini-carte -->
+            <div class="space-y-4 reveal" data-delay="2">
+                <div class="rounded-3xl overflow-hidden border border-slate-200 shadow-lg dark:border-slate-700/80">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1100&q=80"
+                         alt="Conseil RH en entreprise"
+                         class="w-full h-56 object-cover">
+                </div>
+
+                <div class="card-light rounded-2xl p-4 flex items-center gap-4 dark:card-glass">
+                    <div class="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center">
+                        <i class="fas fa-shield-halved text-gold text-lg"></i>
+                    </div>
+                    <div class="text-xs">
+                        <div class="heading font-semibold text-slate-900 dark:text-slate-50 mb-1">
+                            Conformité garantie
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300">
+                            Droit du travail, CNPS, fiscalité salariale : une veille réglementaire permanente pour
+                            sécuriser vos décisions RH.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-16 lg:py-20 bg-white dark:bg-nuit">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal" data-delay="1">
+                <p class="text-[11px] uppercase tracking-[0.25em] text-gold mb-2">Services</p>
+                <h2 class="heading text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
+                    Une offre RH complète, taillée pour votre entreprise.
+                </h2>
+                <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+                    Externalisez tout ou partie de votre fonction RH : paie, administration du personnel, recrutement
+                    et accompagnement à la création d’entreprise.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Paie -->
+                <article
+                        class="service-card rounded-2xl p-6 border border-slate-200 bg-white shadow-sm dark:card-glass dark:border-slate-700/80 reveal"
+                        data-delay="1">
+                    <div class="w-11 h-11 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-file-invoice-dollar text-gold text-lg"></i>
+                    </div>
+                    <h3 class="heading text-base font-semibold text-slate-900 dark:text-slate-50 mb-2">Paie
+                        externalisée</h3>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 mb-4">
+                        Production intégrale de votre paie : collecte des variables, calcul, contrôle, bulletins
+                        sécurisés
+                        et déclarations sociales & fiscales.
+                    </p>
+                    <ul class="text-[11px] text-slate-600 dark:text-slate-300 space-y-1 mb-4">
+                        <li>• Bulletins dématérialisés</li>
+                        <li>• CNPS & impôts sur salaires</li>
+                        <li>• États & journaux de paie</li>
+                    </ul>
+                    <span class="inline-flex items-center gap-1 text-[11px] text-gold font-semibold">
+            Sécuriser ma paie <i class="fas fa-arrow-right text-[10px]"></i>
+          </span>
+                </article>
+
+                <!-- Gestion RH -->
+                <article
+                        class="service-card rounded-2xl p-6 border border-slate-200 bg-white shadow-sm dark:card-glass dark:border-slate-700/80 reveal"
+                        data-delay="2">
+                    <div class="w-11 h-11 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-user-tie text-gold text-lg"></i>
+                    </div>
+                    <h3 class="heading text-base font-semibold text-slate-900 dark:text-slate-50 mb-2">Gestion RH
+                        externalisée</h3>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 mb-4">
+                        Administration complète du personnel : contrats, dossiers salariés, registres, disciplinaire
+                        et tableaux de bord RH.
+                    </p>
+                    <ul class="text-[11px] text-slate-600 dark:text-slate-300 space-y-1 mb-4">
+                        <li>• Contrats & avenants</li>
+                        <li>• Congés & absences</li>
+                        <li>• Règlement intérieur & procédures</li>
+                    </ul>
+                    <span class="inline-flex items-center gap-1 text-[11px] text-gold font-semibold">
+            Structurer ma fonction RH <i class="fas fa-arrow-right text-[10px]"></i>
+          </span>
+                </article>
+
+                <!-- Recrutement -->
+                <article
+                        class="service-card rounded-2xl p-6 border border-slate-200 bg-white shadow-sm dark:card-glass dark:border-slate-700/80 reveal"
+                        data-delay="3">
+                    <div class="w-11 h-11 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-magnifying-glass-plus text-gold text-lg"></i>
+                    </div>
+                    <h3 class="heading text-base font-semibold text-slate-900 dark:text-slate-50 mb-2">Recrutement &
+                        intégration</h3>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 mb-4">
+                        De la définition du besoin à l’onboarding, nous sécurisons vos recrutements clés.
+                    </p>
+                    <ul class="text-[11px] text-slate-600 dark:text-slate-300 space-y-1 mb-4">
+                        <li>• Profil & fiche de poste</li>
+                        <li>• Sourcing & entretiens</li>
+                        <li>• Tests & évaluation</li>
+                        <li>• Parcours d’intégration</li>
+                    </ul>
+                    <span class="inline-flex items-center gap-1 text-[11px] text-gold font-semibold">
+            Lancer un recrutement <i class="fas fa-arrow-right text-[10px]"></i>
+          </span>
+                </article>
+
+                <!-- Création d’entreprise -->
+                <article
+                        class="service-card rounded-2xl p-6 border border-slate-200 bg-white shadow-sm dark:card-glass dark:border-slate-700/80 reveal"
+                        data-delay="4">
+                    <div class="w-11 h-11 rounded-xl bg-gold/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-building text-gold text-lg"></i>
+                    </div>
+                    <h3 class="heading text-base font-semibold text-slate-900 dark:text-slate-50 mb-2">Création &
+                        assistance d’entreprise</h3>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 mb-4">
+                        Accompagnement RH et administratif lors de la création ou structuration de votre entité.
+                    </p>
+                    <ul class="text-[11px] text-slate-600 dark:text-slate-300 space-y-1 mb-4">
+                        <li>• Statuts & formalités</li>
+                        <li>• Immatriculations & CNPS</li>
+                        <li>• Processus RH internes</li>
+                        <li>• Support juridique social</li>
+                    </ul>
+                    <span class="inline-flex items-center gap-1 text-[11px] text-gold font-semibold">
+            Démarrer mon projet <i class="fas fa-arrow-right text-[10px]"></i>
+          </span>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process"
+             class="py-16 bg-slate-50 border-y border-slate-200 dark:bg-[#020617] dark:border-slate-800/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.05fr,0.95fr] gap-10 items-start">
+            <div class="reveal" data-delay="1">
+                <p class="text-[11px] uppercase tracking-[0.25em] text-gold mb-2">Processus</p>
+                <h2 class="heading text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
+                    Un accompagnement structuré, étape par étape.
+                </h2>
+                <p class="text-sm text-slate-700 dark:text-slate-300 mb-6">
+                    Nous intervenons comme un véritable service RH externalisé, avec un processus clair
+                    et des points de contrôle à chaque étape pour garantir un déploiement réussi.
+                </p>
+                <ul class="text-sm text-slate-700 dark:text-slate-200 space-y-2">
+                    <li class="flex gap-2">
+                        <i class="fas fa-check text-gold mt-1 text-xs"></i>
+                        Diagnostic initial gratuit sur votre organisation RH & paie.
+                    </li>
+                    <li class="flex gap-2">
+                        <i class="fas fa-check text-gold mt-1 text-xs"></i>
+                        Proposition d’externalisation sur mesure, avec périmètre et planning.
+                    </li>
+                    <li class="flex gap-2">
+                        <i class="fas fa-check text-gold mt-1 text-xs"></i>
+                        Phase de transition et transfert sécurisé des données.
+                    </li>
+                    <li class="flex gap-2">
+                        <i class="fas fa-check text-gold mt-1 text-xs"></i>
+                        Suivi mensuel, reporting et ajustements continus.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="relative step-line reveal" data-delay="2">
+                <div class="space-y-4 pl-9">
+                    <div class="relative faq-item rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700/80 dark:bg-slate-900/70">
+                        <div class="absolute -left-1.5 top-3 w-3 h-3 rounded-full bg-gold border border-amber-200"></div>
+                        <div class="text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 mb-1">
+                            Étape 1
+                        </div>
+                        <div class="heading text-sm font-semibold text-slate-900 dark:text-slate-50 mb-1">
+                            Diagnostic & cadrage
+                        </div>
+                        <p class="text-xs text-slate-700 dark:text-slate-300">
+                            Analyse de votre contexte (effectif, secteur, outils, enjeux) et clarification du périmètre
+                            à externaliser.
+                        </p>
+                    </div>
+
+                    <div class="relative faq-item rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700/80 dark:bg-slate-900/70">
+                        <div class="absolute -left-1.5 top-3 w-3 h-3 rounded-full bg-gold border border-amber-200"></div>
+                        <div class="text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 mb-1">
+                            Étape 2
+                        </div>
+                        <div class="heading text-sm font-semibold text-slate-900 dark:text-slate-50 mb-1">
+                            Design de la solution
+                        </div>
+                        <p class="text-xs text-slate-700 dark:text-slate-300">
+                            Définition des rôles, des responsabilités et des processus cibles (RH, paie, reporting,
+                            communication).
+                        </p>
+                    </div>
+
+                    <div class="relative faq-item rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700/80 dark:bg-slate-900/70">
+                        <div class="absolute -left-1.5 top-3 w-3 h-3 rounded-full bg-gold border border-amber-200"></div>
+                        <div class="text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 mb-1">
+                            Étape 3
+                        </div>
+                        <div class="heading text-sm font-semibold text-slate-900 dark:text-slate-50 mb-1">
+                            Transition & mise en œuvre
+                        </div>
+                        <p class="text-xs text-slate-700 dark:text-slate-300">
+                            Reprise historique, paramétrage, sécurisation des données, tests et go-live de
+                            l’externalisation.
+                        </p>
+                    </div>
+
+                    <div class="relative faq-item rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700/80 dark:bg-slate-900/70">
+                        <div class="absolute -left-1.5 top-3 w-3 h-3 rounded-full bg-gold border border-amber-200"></div>
+                        <div class="text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 mb-1">
+                            Étape 4
+                        </div>
+                        <div class="heading text-sm font-semibold text-slate-900 dark:text-slate-50 mb-1">
+                            Suivi & amélioration continue
+                        </div>
+                        <p class="text-xs text-slate-700 dark:text-slate-300">
+                            Points mensuels, tableaux de bord, ajustements et accompagnement dans la durée.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="py-16 lg:py-20 bg-white dark:bg-nuit">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal" data-delay="1">
+                <p class="text-[11px] uppercase tracking-[0.25em] text-gold mb-2">Tarifs</p>
+                <h2 class="heading text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
+                    Des formules adaptées à chaque taille d’entreprise.
+                </h2>
+                <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+                    Des packs clairs et transparents, ajustables selon votre effectif et le périmètre que vous souhaitez
+                    externaliser.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Pack 1 -->
+                <div class="pricing-card rounded-2xl border border-slate-200 bg-white p-6 flex flex-col shadow-sm dark:border-slate-700/80 dark:bg-slate-900/60 reveal"
+                     data-delay="1">
+                    <div class="mb-6">
+                        <h3 class="heading text-base font-semibold text-slate-900 dark:text-slate-50 mb-1">Pack RH
+                            Essential</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mb-3">
+                            Pour TPE / jeunes entreprises (jusqu’à 20 salariés).
+                        </p>
+                        <div class="heading text-2xl font-semibold text-gold">
+                            À partir de <span class="text-xl">250 000</span> FCFA / mois
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-700 dark:text-slate-200 space-y-2 mb-6">
+                        <li>• Gestion administrative du personnel</li>
+                        <li>• Tenue des dossiers & registres</li>
+                        <li>• Gestion des congés & absences</li>
+                        <li>• Paie mensuelle de base</li>
+                        <li class="text-slate-400 dark:text-slate-500">• Recrutement inclus</li>
+                        <li class="text-slate-400 dark:text-slate-500">• Audit RH annuel</li>
+                    </ul>
+                    <a href="#contact"
+                       class="mt-auto inline-flex justify-center px-4 py-2.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold hover:bg-slate-200 transition dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700">
+                        Demander un devis
+                    </a>
+                </div>
+
+                <!-- Pack 2 -->
+                <div class="pricing-card rounded-2xl border border-gold/80 bg-gradient-to-b from-slate-50 via-white to-slate-100 p-6 flex flex-col shadow-soft-gold relative dark:from-slate-900 dark:via-slate-900/95 dark:to-slate-950 reveal"
+                     data-delay="2">
+          <span class="absolute -top-3 right-4 text-[10px] px-3 py-1 rounded-full bg-gold text-nuit font-semibold uppercase tracking-[0.18em]">
+            Recommandé
+          </span>
+                    <div class="mb-6">
+                        <h3 class="heading text-base font-semibold text-slate-900 dark:text-slate-50 mb-1">Pack Paie
+                            Premium</h3>
+                        <p class="text-xs text-slate-700 dark:text-slate-200 mb-3">
+                            Pour PME et structures de 21 à 100 salariés.
+                        </p>
+                        <div class="heading text-2xl font-semibold text-gold">
+                            À partir de <span class="text-xl">450 000</span> FCFA / mois
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-800 dark:text-slate-100 space-y-2 mb-6">
+                        <li>• Tous les services du Pack Essential</li>
+                        <li>• Gestion complète de la paie & variables</li>
+                        <li>• Déclarations CNPS & fiscales</li>
+                        <li>• Reporting RH & paie personnalisé</li>
+                        <li>• 2 recrutements inclus / an</li>
+                        <li>• Audit RH annuel</li>
+                    </ul>
+                    <a href="#contact"
+                       class="mt-auto inline-flex justify-center px-4 py-2.5 rounded-full bg-gold text-nuit text-xs font-semibold hover:bg-amber-300 transition">
+                        Parler à un consultant
+                    </a>
+                </div>
+
+                <!-- Pack 3 -->
+                <div class="pricing-card rounded-2xl border border-slate-200 bg-white p-6 flex flex-col shadow-sm dark:border-slate-700/80 dark:bg-slate-900/60 reveal"
+                     data-delay="3">
+                    <div class="mb-6">
+                        <h3 class="heading text-base font-semibold text-slate-900 dark:text-slate-50 mb-1">Pack
+                            Entreprise Complete</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mb-3">
+                            Pour grandes entreprises & groupes (+100 salariés).
+                        </p>
+                        <div class="heading text-2xl font-semibold text-gold">
+                            Sur devis personnalisé
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-700 dark:text-slate-200 space-y-2 mb-6">
+                        <li>• Tous les services du Pack Premium</li>
+                        <li>• Manager RH dédié</li>
+                        <li>• Recrutements illimités sur périmètre défini</li>
+                        <li>• Formation des managers & équipes RH</li>
+                        <li>• Accompagnement au changement</li>
+                        <li>• Tableau de bord RH temps réel</li>
+                    </ul>
+                    <a href="#contact"
+                       class="mt-auto inline-flex justify-center px-4 py-2.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold hover:bg-slate-200 transition dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700">
+                        Concevoir un pack sur mesure
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials"
+             class="py-16 bg-slate-50 dark:bg-[#020617] border-t border-slate-200 dark:border-slate-800/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal" data-delay="1">
+                <p class="text-[11px] uppercase tracking-[0.25em] text-gold mb-2">Témoignages</p>
+                <h2 class="heading text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
+                    Ils ont externalisé leurs RH avec RH Partners Afric.
+                </h2>
+                <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+                    Découvrez les retours de dirigeants et responsables RH qui nous confient l’administration de
+                    leurs équipes et de leur paie.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <article
+                        class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700/80 dark:bg-slate-900/70 reveal"
+                        data-delay="1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center heading text-sm font-semibold text-nuit">
+                            AK
+                        </div>
+                        <div class="text-xs">
+                            <div class="font-semibold text-slate-900 dark:text-slate-50">Amadou Keita</div>
+                            <div class="text-slate-500 dark:text-slate-400">Directeur Général – Tech Solutions SARL
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 mb-3">
+                        « Depuis que nous avons externalisé la paie et l’administration du personnel à RH Partners
+                        Afric,
+                        nous avons réduit nos coûts RH de près de 25% et gagné un temps précieux pour nous concentrer
+                        sur
+                        notre expansion. La rigueur et la réactivité de l’équipe sont remarquables. »
+                    </p>
+                    <div class="flex gap-1 text-yellow-400 text-xs">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </article>
+
+                <article
+                        class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700/80 dark:bg-slate-900/70 reveal"
+                        data-delay="2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center heading text-sm font-semibold text-nuit">
+                            SD
+                        </div>
+                        <div class="text-xs">
+                            <div class="font-semibold text-slate-900 dark:text-slate-50">Sofia Diallo</div>
+                            <div class="text-slate-500 dark:text-slate-400">Directrice des Opérations – Agro
+                                Industries
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 mb-3">
+                        « Leur accompagnement en recrutement nous a permis de constituer des équipes solides
+                        pour notre développement régional. Les process sont clairs, les échanges fluides et les
+                        intégrations
+                        des nouveaux collaborateurs se font désormais sans friction. »
+                    </p>
+                    <div class="flex gap-1 text-yellow-400 text-xs">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-16 bg-white dark:bg-nuit border-t border-slate-200 dark:border-slate-800/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10 reveal" data-delay="1">
+                <p class="text-[11px] uppercase tracking-[0.25em] text-gold mb-2">FAQ</p>
+                <h2 class="heading text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
+                    Questions fréquentes sur l’externalisation RH.
+                </h2>
+                <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+                    Quelques réponses aux questions que se posent souvent les dirigeants avant de confier leurs RH à un
+                    cabinet.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <details
+                        class="faq-item rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700/80 dark:bg-slate-900/70 reveal"
+                        data-delay="1">
+                    <summary
+                            class="flex justify-between items-center cursor-pointer text-sm text-slate-900 dark:text-slate-50">
+                        <span>Pourquoi externaliser la fonction RH et la paie ?</span>
+                        <i class="fas fa-chevron-down text-xs text-slate-500 ml-3"></i>
+                    </summary>
+                    <p class="mt-3 text-xs text-slate-700 dark:text-slate-300">
+                        L’externalisation permet de réduire vos coûts fixes, sécuriser la conformité juridique et
+                        bénéficier
+                        d’une expertise pointue, tout en libérant du temps aux dirigeants pour le développement du
+                        business.
+                    </p>
+                </details>
+
+                <details
+                        class="faq-item rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700/80 dark:bg-slate-900/70 reveal"
+                        data-delay="2">
+                    <summary
+                            class="flex justify-between items-center cursor-pointer text-sm text-slate-900 dark:text-slate-50">
+                        <span>Comment garantissez-vous la confidentialité des données ?</span>
+                        <i class="fas fa-chevron-down text-xs text-slate-500 ml-3"></i>
+                    </summary>
+                    <p class="mt-3 text-xs text-slate-700 dark:text-slate-300">
+                        Nous appliquons des engagements stricts de confidentialité, des accès sécurisés, des sauvegardes
+                        régulières
+                        et des protocoles de protection conformes aux meilleures pratiques du marché.
+                    </p>
+                </details>
+
+                <details
+                        class="faq-item rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700/80 dark:bg-slate-900/70 reveal"
+                        data-delay="3">
+                    <summary
+                            class="flex justify-between items-center cursor-pointer text-sm text-slate-900 dark:text-slate-50">
+                        <span>Travaillez-vous uniquement en Côte d’Ivoire ?</span>
+                        <i class="fas fa-chevron-down text-xs text-slate-500 ml-3"></i>
+                    </summary>
+                    <p class="mt-3 text-xs text-slate-700 dark:text-slate-300">
+                        Nous sommes basés à Abidjan et intervenons principalement en Afrique de l’Ouest (Côte d’Ivoire
+                        et pays UEMOA),
+                        avec des modalités d’accompagnement à distance ou hybrides.
+                    </p>
+                </details>
+
+                <details
+                        class="faq-item rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700/80 dark:bg-slate-900/70 reveal"
+                        data-delay="4">
+                    <summary
+                            class="flex justify-between items-center cursor-pointer text-sm text-slate-900 dark:text-slate-50">
+                        <span>Quelle est la durée minimale d’engagement ?</span>
+                        <i class="fas fa-chevron-down text-xs text-slate-500 ml-3"></i>
+                    </summary>
+                    <p class="mt-3 text-xs text-slate-700 dark:text-slate-300">
+                        Elle dépend du pack choisi. En général, nous fonctionnons sur des engagements de 12 mois,
+                        avec des clauses de sortie définies en toute transparence dans le contrat.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact"
+             class="py-16 bg-slate-50 dark:bg-[#020617] border-t border-slate-200 dark:border-slate-800/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.05fr,0.95fr] gap-10 items-start">
+            <div class="reveal" data-delay="1">
+                <p class="text-[11px] uppercase tracking-[0.25em] text-gold mb-2">Contact</p>
+                <h2 class="heading text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-3">
+                    Prêt à externaliser votre fonction RH ?
+                </h2>
+                <p class="text-sm text-slate-700 dark:text-slate-300 mb-6">
+                    Partagez-nous vos enjeux, nous construisons ensemble une solution d’externalisation RH & paie
+                    alignée sur la
+                    taille, le secteur et l’ambition de votre entreprise.
+                </p>
+
+                <div class="space-y-5 text-sm text-slate-800 dark:text-slate-200">
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-2xl bg-slate-100 flex items-center justify-center dark:bg-slate-900">
+                            <i class="fas fa-location-dot text-gold text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-slate-900 dark:text-slate-50">Adresse</div>
+                            <div class="text-slate-700 dark:text-slate-300 text-xs">
+                                Plateau, Abidjan – Côte d’Ivoire<br>
+                                Immeuble Le Général, 3ème étage
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-2xl bg-slate-100 flex items-center justify-center dark:bg-slate-900">
+                            <i class="fas fa-phone text-gold text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-slate-900 dark:text-slate-50">Téléphone</div>
+                            <div class="text-slate-700 dark:text-slate-300 text-xs">
+                                +225 27 22 44 55 66<br>
+                                Lun – Ven : 8h00 – 18h00
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-2xl bg-slate-100 flex items-center justify-center dark:bg-slate-900">
+                            <i class="fas fa-envelope text-gold text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-slate-900 dark:text-slate-50">Email</div>
+                            <div class="text-slate-700 dark:text-slate-300 text-xs">
+                                contact@rhpartnersafric.com<br>
+                                support@rhpartnersafric.com
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 mb-2">
+                            Réseaux
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#"
+                               class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+                                <i class="fab fa-linkedin-in text-sm"></i>
+                            </a>
+                            <a href="#"
+                               class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+                                <i class="fab fa-facebook-f text-sm"></i>
+                            </a>
+                            <a href="#"
+                               class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+                                <i class="fab fa-x-twitter text-sm"></i>
+                            </a>
+                            <a href="#"
+                               class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:text-gold hover:bg-slate-200 transition dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+                                <i class="fab fa-instagram text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulaire -->
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:card-glass dark:border-slate-700/80 reveal"
+                 data-delay="2">
+                <h3 class="heading text-lg font-semibold text-slate-900 dark:text-slate-50 mb-4">
+                    Envoyer une demande
+                </h3>
+                <form id="contact-form" class="space-y-4">
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Nom
+                                complet</label>
+                            <input type="text"
+                                   class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 form-input dark:border-slate-600 dark:bg-slate-900/60 dark:text-slate-100"
+                                   required>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Entreprise</label>
+                            <input type="text"
+                                   class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 form-input dark:border-slate-600 dark:bg-slate-900/60 dark:text-slate-100"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Email</label>
+                            <input type="email"
+                                   class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 form-input dark:border-slate-600 dark:bg-slate-900/60 dark:text-slate-100"
+                                   required>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Téléphone</label>
+                            <input type="tel"
+                                   class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 form-input dark:border-slate-600 dark:bg-slate-900/60 dark:text-slate-100"
+                                   required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Service
+                            souhaité</label>
+                        <select class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 form-input dark:border-slate-600 dark:bg-slate-900/60 dark:text-slate-100">
+                            <option>Gestion RH externalisée</option>
+                            <option>Paie externalisée</option>
+                            <option>Recrutement & intégration</option>
+                            <option>Création / structuration d’entreprise</option>
+                            <option>Plusieurs services</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Message</label>
+                        <textarea rows="4"
+                                  class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 form-input dark:border-slate-600 dark:bg-slate-900/60 dark:text-slate-100"
+                                  required></textarea>
+                    </div>
+                    <button type="submit"
+                            class="w-full inline-flex justify-center items-center gap-2 px-4 py-2.5 rounded-full bg-gold text-nuit text-xs font-semibold shadow-soft-gold hover:bg-amber-300 transition">
+                        Envoyer ma demande
+                        <i class="fas fa-paper-plane text-[11px]"></i>
+                    </button>
+                    <div id="form-success"
+                         class="hidden mt-3 text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2 dark:text-emerald-300 dark:bg-emerald-900/20 dark:border-emerald-600/40">
+                        Votre message a bien été envoyé. Un consultant vous contactera dans les plus brefs délais.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-slate-900 border-t border-slate-800/80 py-5 dark:bg-[#020617]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
+        <div class="flex items-center gap-2">
+            <span class="heading font-semibold text-slate-100">RH Partners <span class="text-gold">Afric</span></span>
+            <span class="hidden sm:inline text-slate-500">• Externalisation RH & Paie</span>
+        </div>
+        <div class="flex flex-wrap gap-3 items-center">
+            <a href="#" class="hover:text-gold">Mentions légales</a>
+            <a href="#" class="hover:text-gold">Politique de confidentialité</a>
+            <span class="text-slate-500">&copy; <span id="year"></span> RH Partners Afric. Tous droits réservés.</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme
+    const htmlEl = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('theme-icon-sun');
+    const moonIcon = document.getElementById('theme-icon-moon');
+
+    function setTheme(mode) {
+        if (mode === 'light') {
+            htmlEl.classList.remove('dark');
+            htmlEl.classList.add('light');
+            localStorage.setItem('theme', 'light');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        } else {
+            htmlEl.classList.add('dark');
+            htmlEl.classList.remove('light');
+            localStorage.setItem('theme', 'dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+    }
+
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+        setTheme(storedTheme);
+    } else {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+    }
+
+    themeToggle.addEventListener('click', () => {
+        if (htmlEl.classList.contains('dark')) setTheme('light');
+        else setTheme('dark');
+    });
+
+    // Mobile menu
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+    // Smooth scroll anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const href = a.getAttribute('href');
+            if (!href || href === '#') return;
+            const target = document.querySelector(href);
+            if (!target) return;
+            e.preventDefault();
+            const offset = 72;
+            const top = target.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({top, behavior: 'smooth'});
+            if (!menu.classList.contains('hidden')) menu.classList.add('hidden');
+        });
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {threshold: 0.15});
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // Fake submit
+    document.getElementById('contact-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const box = document.getElementById('form-success');
+        box.classList.remove('hidden');
+        setTimeout(() => box.classList.add('hidden'), 5000);
+        e.target.reset();
+    });
+</script>
 
 </body>
 </html>

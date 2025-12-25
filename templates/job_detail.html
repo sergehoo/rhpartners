@@ -1,10 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "website/base.html" %}
 
-</body>
-</html>
+{% block title %}{{ offer.title }} | Recrutement{% endblock %}
+
+{% block content %}
+<section class="py-16 bg-slate-50 dark:bg-[#020617]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.1fr,0.9fr] gap-10">
+    <div>
+      <a href="{% url 'website:job_list' %}" class="text-xs text-slate-500 hover:text-gold inline-flex items-center gap-1 mb-4">
+        <i class="fas fa-arrow-left text-[10px]"></i> Retour aux offres
+      </a>
+
+      <h1 class="heading text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-slate-50 mb-2">
+        {{ offer.title }}
+      </h1>
+      <p class="text-xs text-slate-600 dark:text-slate-300 mb-4">
+        {{ offer.location }} • {{ offer.get_contract_type_display }}
+      </p>
+
+      <div class="prose prose-sm max-w-none text-slate-700 dark:prose-invert dark:text-slate-200">
+        {{ offer.description|linebreaks }}
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900/70">
+      <h2 class="heading text-lg font-semibold text-slate-900 dark:text-slate-50 mb-3">
+        Postuler à cette offre
+      </h2>
+
+      {% if messages %}
+        <div class="mb-3 text-[11px]">
+          {% for message in messages %}
+            <div class="mb-1 px-3 py-2 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-300 dark:border-emerald-600/40">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <form method="post" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %}
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Prénom</label>
+            {{ form.first_name }}{{ form.first_name.errors }}
+          </div>
+          <div>
+            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Nom</label>
+            {{ form.last_name }}{{ form.last_name.errors }}
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Email</label>
+            {{ form.email }}{{ form.email.errors }}
+          </div>
+          <div>
+            <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Téléphone</label>
+            {{ form.phone }}{{ form.phone.errors }}
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">CV</label>
+          {{ form.cv }}{{ form.cv.errors }}
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Lettre de motivation</label>
+          {{ form.cover_letter }}{{ form.cover_letter.errors }}
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-medium text-slate-700 dark:text-slate-200 mb-1">Message (optionnel)</label>
+          {{ form.notes }}{{ form.notes.errors }}
+        </div>
+
+        <button type="submit" class="w-full inline-flex justify-center items-center gap-2 px-4 py-2.5 rounded-full bg-gold text-nuit text-xs font-semibold shadow-soft-gold hover:bg-amber-300 transition">
+          Envoyer ma candidature
+          <i class="fas fa-paper-plane text-[11px]"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

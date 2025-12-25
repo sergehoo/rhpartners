@@ -1,10 +1,1188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RH Partners Afric | Excellence en Externalisation RH</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #051536;
+            --primary-gold: #ffa600;
+            --primary-white: #ffffff;
+            --secondary-gold: #ffd166;
+            --light-blue: #0d2a5c;
+            --dark-gradient: linear-gradient(135deg, #051536 0%, #0a1f4d 100%);
+            --gold-gradient: linear-gradient(135deg, #ffa600 0%, #ffd166 100%);
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section avec effet parallax */
+        .hero-bg {
+            background: linear-gradient(rgba(5, 21, 54, 0.85), rgba(5, 21, 54, 0.9)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gold-gradient);
+            opacity: 0.05;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Design des cartes avec bordure dorée */
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(5, 21, 54, 0.08);
+            border: 1px solid rgba(255, 166, 0, 0.1);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gold-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(5, 21, 54, 0.15);
+            border-color: rgba(255, 166, 0, 0.3);
+        }
+
+        /* Animation des icônes */
+        .service-icon {
+            background: var(--gold-gradient);
+            color: var(--primary-dark);
+            transition: all 0.3s ease;
+            transform: rotate(0deg);
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(10deg);
+            box-shadow: 0 10px 20px rgba(255, 166, 0, 0.3);
+        }
+
+        /* Stat cards avec effet néon */
+        .stat-card {
+            background: var(--dark-gradient);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 166, 0, 0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gold-gradient);
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 166, 0, 0.2);
+        }
+
+        /* Navigation avec effet de soulignement doré */
+        .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--gold-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Boutons avec effet brillant */
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: var(--primary-dark);
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 166, 0, 0.3);
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-gold:hover::before {
+            left: 100%;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 166, 0, 0.4);
+        }
+
+        .btn-dark {
+            background: var(--dark-gradient);
+            color: white;
+            border: 1px solid rgba(255, 166, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-dark:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(5, 21, 54, 0.3);
+            border-color: rgba(255, 166, 0, 0.6);
+        }
+
+        /* Testimonials avec effet citation */
+        .testimonial-card {
+            background: white;
+            border-radius: 16px;
+            position: relative;
+            border-left: 5px solid var(--primary-gold);
+            box-shadow: 0 10px 30px rgba(5, 21, 54, 0.08);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 80px;
+            color: var(--primary-gold);
+            opacity: 0.2;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Pricing cards avec effet de mise en avant */
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(5, 21, 54, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary-gold);
+            box-shadow: 0 20px 40px rgba(255, 166, 0, 0.15);
+        }
+
+        .pricing-card.popular::before {
+            content: 'POPULAIRE';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--gold-gradient);
+            color: var(--primary-dark);
+            font-weight: 700;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(5, 21, 54, 0.15);
+        }
+
+        /* Section avec fond dégradé */
+        .section-dark {
+            background: var(--dark-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-dark::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffa600' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        /* Animation d'entrée */
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .animate-slide-left {
+            animation: slideLeft 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideLeft {
+            from { transform: translateX(40px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Form styling */
+        .form-input {
+            border: 1px solid rgba(5, 21, 54, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 3px rgba(255, 166, 0, 0.2);
+            outline: none;
+        }
+
+        /* Custom bullet points */
+        .custom-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+
+        .custom-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--primary-gold);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Section separator */
+        .section-separator {
+            height: 1px;
+            background: var(--gold-gradient);
+            width: 100px;
+            margin: 0 auto;
+        }
+
+        /* Gold accent line */
+        .gold-line {
+            height: 3px;
+            background: var(--gold-gradient);
+            width: 60px;
+            border-radius: 2px;
+        }
+
+        /* Pattern background */
+        .pattern-bg {
+            background-color: #051536;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(255, 166, 0, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 166, 0, 0.05) 0%, transparent 20%);
+        }
+    </style>
 </head>
-<body>
-$END$
+<body class="text-gray-800">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#051536] to-[#0a1f4d] flex items-center justify-center shadow-lg">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#ffa600] to-[#ffd166] flex items-center justify-center">
+                            <i class="fas fa-users text-[#051536] text-xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="brand-font text-xl font-bold text-[#051536]">RH Partners</div>
+                        <div class="text-sm font-semibold bg-gradient-to-r from-[#ffa600] to-[#ffd166] bg-clip-text text-transparent">AFRIC</div>
+                    </div>
+                </div>
+
+                <!-- Menu Desktop -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-[#051536] font-semibold hover:text-[#ffa600] transition">Accueil</a>
+                    <a href="#about" class="nav-link text-[#051536] font-semibold hover:text-[#ffa600] transition">À propos</a>
+                    <a href="#services" class="nav-link text-[#051536] font-semibold hover:text-[#ffa600] transition">Services</a>
+                    <a href="#pricing" class="nav-link text-[#051536] font-semibold hover:text-[#ffa600] transition">Solutions</a>
+                    <a href="#contact" class="nav-link text-[#051536] font-semibold hover:text-[#ffa600] transition">Contact</a>
+                </div>
+
+                <div class="hidden md:block">
+                    <a href="#contact" class="btn-gold px-6 py-3 rounded-full font-bold shadow-lg">Demander un devis</a>
+                </div>
+
+                <!-- Menu Mobile -->
+                <button id="mobile-menu-btn" class="md:hidden text-[#051536]">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Menu Mobile -->
+            <div id="mobile-menu" class="hidden md:hidden mt-6 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="text-[#051536] font-semibold hover:text-[#ffa600] transition">Accueil</a>
+                    <a href="#about" class="text-[#051536] font-semibold hover:text-[#ffa600] transition">À propos</a>
+                    <a href="#services" class="text-[#051536] font-semibold hover:text-[#ffa600] transition">Services</a>
+                    <a href="#pricing" class="text-[#051536] font-semibold hover:text-[#ffa600] transition">Solutions</a>
+                    <a href="#contact" class="text-[#051536] font-semibold hover:text-[#ffa600] transition">Contact</a>
+                    <a href="#contact" class="btn-gold px-6 py-3 rounded-full font-bold text-center mt-4">Demander un devis</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white py-24 md:py-32">
+        <div class="container mx-auto px-4 hero-content">
+            <div class="max-w-3xl">
+                <div class="inline-block mb-6">
+                    <span class="bg-gradient-to-r from-[#ffa600] to-[#ffd166] text-[#051536] px-4 py-2 rounded-full font-bold text-sm uppercase tracking-wider">Expertise RH depuis 2010</span>
+                </div>
+
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-slide-up">
+                    <span class="block">L'Excellence</span>
+                    <span class="block bg-gradient-to-r from-[#ffa600] via-[#ffc14d] to-[#ffa600] bg-clip-text text-transparent">en Externalisation RH</span>
+                </h1>
+
+                <p class="text-xl mb-10 text-gray-200 animate-slide-up" style="animation-delay: 0.2s">
+                    RH Partners Afric transforme votre gestion des ressources humaines en un avantage compétitif durable.
+                    Expertise, innovation et accompagnement sur mesure pour votre réussite.
+                </p>
+
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 animate-slide-up" style="animation-delay: 0.4s">
+                    <a href="#contact" class="btn-gold px-8 py-4 rounded-full font-bold text-lg text-center">
+                        <i class="fas fa-crown mr-2"></i> Parler à un expert
+                    </a>
+                    <a href="#services" class="btn-dark px-8 py-4 rounded-full font-bold text-lg text-center border border-[#ffa600]/30">
+                        <i class="fas fa-gem mr-2"></i> Découvrir nos services
+                    </a>
+                </div>
+
+                <!-- Element décoratif flottant -->
+                <div class="absolute right-10 top-1/4 animate-float hidden lg:block">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#ffa600] to-[#ffd166] opacity-20"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 pattern-bg text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="stat-card p-6 text-center">
+                    <div class="text-4xl font-bold text-[#ffa600] mb-2" id="client-count">0</div>
+                    <div class="text-gray-300 font-medium">Clients Satisfaits</div>
+                </div>
+
+                <div class="stat-card p-6 text-center">
+                    <div class="text-4xl font-bold text-[#ffa600] mb-2" id="payroll-count">0</div>
+                    <div class="text-gray-300 font-medium">Bulletins de Paie/Mois</div>
+                </div>
+
+                <div class="stat-card p-6 text-center">
+                    <div class="text-4xl font-bold text-[#ffa600] mb-2" id="recruitment-count">0</div>
+                    <div class="text-gray-300 font-medium">Recrutements Réussis</div>
+                </div>
+
+                <div class="stat-card p-6 text-center">
+                    <div class="text-4xl font-bold text-[#ffa600] mb-2" id="experience-count">0</div>
+                    <div class="text-gray-300 font-medium">Années d'Expertise</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-[#051536] mb-4">
+                    <span class="block">Notre</span>
+                    <span class="bg-gradient-to-r from-[#ffa600] to-[#ffd166] bg-clip-text text-transparent">Philosophie</span>
+                </h2>
+                <div class="gold-line mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Chez RH Partners Afric, nous croyons que la gestion des ressources humaines est un levier stratégique
+                    pour la performance et la croissance des entreprises africaines.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="animate-slide-left">
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] w-64 h-64 rounded-2xl absolute -z-10 -top-6 -left-6 opacity-20"></div>
+                        <div class="bg-gradient-to-br from-[#051536] to-[#0a1f4d] p-8 rounded-2xl shadow-2xl">
+                            <h3 class="text-2xl font-bold text-white mb-6">Notre Engagement</h3>
+                            <p class="text-gray-300 mb-6">
+                                Nous nous engageons à fournir des solutions RH sur mesure qui allient expertise locale
+                                et standards internationaux, tout en garantissant conformité légale et innovation continue.
+                            </p>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] p-2 rounded-lg mr-4">
+                                        <i class="fas fa-star text-[#051536]"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white">Excellence</h4>
+                                        <p class="text-gray-300">Nous visons l'excellence dans chaque service rendu.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] p-2 rounded-lg mr-4">
+                                        <i class="fas fa-shield-alt text-[#051536]"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white">Confidentialité</h4>
+                                        <p class="text-gray-300">Vos données sont protégées avec la plus haute sécurité.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate-slide-left" style="animation-delay: 0.2s">
+                    <h3 class="text-2xl font-bold text-[#051536] mb-6">Pourquoi Nous Choisir ?</h3>
+                    <p class="text-gray-700 mb-8">
+                        Avec plus d'une décennie d'expérience, RH Partners Afric a développé une méthodologie unique
+                        d'accompagnement des entreprises dans leur transformation RH.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-3xl font-bold text-[#ffa600] mr-4">01</div>
+                            <div>
+                                <h4 class="font-bold text-[#051536] text-lg mb-2">Expertise Approfondie</h4>
+                                <p class="text-gray-700">Notre équipe d'experts maîtrise les spécificités légales et culturelles du marché africain.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="text-3xl font-bold text-[#ffa600] mr-4">02</div>
+                            <div>
+                                <h4 class="font-bold text-[#051536] text-lg mb-2">Solutions Sur Mesure</h4>
+                                <p class="text-gray-700">Nous adaptons nos services aux besoins spécifiques de votre entreprise.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="text-3xl font-bold text-[#ffa600] mr-4">03</div>
+                            <div>
+                                <h4 class="font-bold text-[#051536] text-lg mb-2">Innovation Continue</h4>
+                                <p class="text-gray-700">Nous intégrons les dernières technologies pour optimiser vos processus RH.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-[#051536] mb-4">
+                    <span class="block">Nos Services</span>
+                    <span class="bg-gradient-to-r from-[#ffa600] to-[#ffd166] bg-clip-text text-transparent">Premium</span>
+                </h2>
+                <div class="gold-line mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Des solutions RH complètes et innovantes, conçues pour optimiser votre gestion des ressources humaines.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card p-8">
+                    <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-user-tie text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#051536] mb-4">Gestion RH Externalisée</h3>
+                    <p class="text-gray-700 mb-6">
+                        Administration complète de vos ressources humaines avec une approche stratégique et opérationnelle.
+                    </p>
+                    <a href="#" class="text-[#ffa600] font-bold hover:text-[#051536] transition flex items-center group">
+                        Découvrir <i class="fas fa-arrow-right ml-2 group-hover:ml-4 transition-all"></i>
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card p-8" style="animation-delay: 0.1s">
+                    <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-file-invoice-dollar text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#051536] mb-4">Paie Externalisée</h3>
+                    <p class="text-gray-700 mb-6">
+                        Traitement sécurisé et conforme de la paie, avec déclarations sociales et fiscales optimisées.
+                    </p>
+                    <a href="#" class="text-[#ffa600] font-bold hover:text-[#051536] transition flex items-center group">
+                        Découvrir <i class="fas fa-arrow-right ml-2 group-hover:ml-4 transition-all"></i>
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card p-8" style="animation-delay: 0.2s">
+                    <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-search text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#051536] mb-4">Recrutement & Intégration</h3>
+                    <p class="text-gray-700 mb-6">
+                        Trouvez les talents qui correspondent parfaitement à votre culture d'entreprise et vos besoins.
+                    </p>
+                    <a href="#" class="text-[#ffa600] font-bold hover:text-[#051536] transition flex items-center group">
+                        Découvrir <i class="fas fa-arrow-right ml-2 group-hover:ml-4 transition-all"></i>
+                    </a>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card p-8" style="animation-delay: 0.3s">
+                    <div class="service-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-building text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#051536] mb-4">Création d'Entreprise</h3>
+                    <p class="text-gray-700 mb-6">
+                        Accompagnement complet dans la création et la mise en place des processus RH de votre entreprise.
+                    </p>
+                    <a href="#" class="text-[#ffa600] font-bold hover:text-[#051536] transition flex items-center group">
+                        Découvrir <i class="fas fa-arrow-right ml-2 group-hover:ml-4 transition-all"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Avantages Section -->
+            <div class="mt-24">
+                <h3 class="text-2xl font-bold text-[#051536] mb-8 text-center">
+                    Les <span class="bg-gradient-to-r from-[#ffa600] to-[#ffd166] bg-clip-text text-transparent">Avantages</span> Clés
+                </h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-[#ffa600]/10">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] text-[#051536] p-3 rounded-xl mr-4">
+                                <i class="fas fa-chart-line text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-[#051536] text-lg">Optimisation des Coûts</h4>
+                        </div>
+                        <p class="text-gray-700">
+                            Réduction de vos coûts RH jusqu'à 40% grâce à l'externalisation stratégique et l'optimisation des processus.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-[#ffa600]/10">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] text-[#051536] p-3 rounded-xl mr-4">
+                                <i class="fas fa-shield-alt text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-[#051536] text-lg">Conformité Totale</h4>
+                        </div>
+                        <p class="text-gray-700">
+                            Veille réglementaire permanente pour garantir la conformité de vos pratiques avec la législation en vigueur.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-[#ffa600]/10">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] text-[#051536] p-3 rounded-xl mr-4">
+                                <i class="fas fa-brain text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-[#051536] text-lg">Expertise Stratégique</h4>
+                        </div>
+                        <p class="text-gray-700">
+                            Accès à une équipe d'experts RH sans les coûts de recrutement, formation et gestion associés.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 section-dark text-white">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">
+                    <span class="block">Ils Nous Font</span>
+                    <span class="bg-gradient-to-r from-[#ffa600] to-[#ffd166] bg-clip-text text-transparent">Confiance</span>
+                </h2>
+                <div class="gold-line mx-auto mb-6"></div>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                    Découvrez les témoignages de dirigeants qui ont transformé leur gestion RH avec notre accompagnement.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto relative">
+                <div class="testimonial-slide testimonial-card p-8 md:p-12 active">
+                    <div class="flex flex-col md:flex-row items-center md:items-start mb-8">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-[#ffa600] to-[#ffd166] flex items-center justify-center text-[#051536] text-2xl font-bold mb-4 md:mb-0 md:mr-6">
+                            AK
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="font-bold text-xl mb-2">Amadou Keita</h4>
+                            <p class="text-[#ffa600]">Directeur Général, Tech Solutions SARL</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-800 text-lg italic mb-6">
+                        "RH Partners Afric a révolutionné notre approche des ressources humaines. Leur expertise nous a permis de réduire nos coûts administratifs de 35% tout en améliorant la satisfaction de nos employés. Un partenariat précieux qui a dépassé toutes nos attentes."
+                    </p>
+                    <div class="flex justify-center md:justify-start">
+                        <i class="fas fa-star text-[#ffa600]"></i>
+                        <i class="fas fa-star text-[#ffa600]"></i>
+                        <i class="fas fa-star text-[#ffa600]"></i>
+                        <i class="fas fa-star text-[#ffa600]"></i>
+                        <i class="fas fa-star text-[#ffa600]"></i>
+                    </div>
+                </div>
+
+                <div class="testimonial-slide testimonial-card p-8 md:p-12 hidden">
+                    <div class="flex flex-col md:flex-row items-center md:items-start mb-8">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-[#ffa600] to-[#ffd166] flex items-center justify-center text-[#051536] text-2xl font-bold mb-4 md:mb-0 md:mr-6">
+                            SD
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="font-bold text-xl mb-2">Sofia Diallo</h4>
+                            <p class="text-[#ffa600]">Directrice des Opérations, Agro Industries</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-800 text-lg italic mb-6">
+                        "Leur expertise en recrutement nous a permis de trouver les profils parfaits pour notre expansion régionale. Le processus d'intégration est remarquable et nous a aidés à fidéliser nos nouveaux talents. Un service premium qui vaut chaque investissement."
+                    </p>
+                    <div class="flex justify-center md:justify-start">
+                        <i class="fas fa-star text-[#ffa600]"></i>
+                        <i class="fas fa-star text-[#ffa600]"></i>
+                        <i class="fas fa-star text-[#ffa600]"></i>
+                        <i class="fas fa-star text-[#ffa600]"></i>
+                        <i class="fas fa-star text-[#ffa600]"></i>
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-12 space-x-4">
+                    <button id="prev-testimonial" class="w-12 h-12 rounded-full bg-gradient-to-br from-[#ffa600] to-[#ffd166] text-[#051536] flex items-center justify-center hover:shadow-lg transition shadow-md">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="next-testimonial" class="w-12 h-12 rounded-full bg-gradient-to-br from-[#ffa600] to-[#ffd166] text-[#051536] flex items-center justify-center hover:shadow-lg transition shadow-md">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-[#051536] mb-4">
+                    <span class="block">Solutions</span>
+                    <span class="bg-gradient-to-r from-[#ffa600] to-[#ffd166] bg-clip-text text-transparent">Sur Mesure</span>
+                </h2>
+                <div class="gold-line mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Des formules adaptées à chaque entreprise, de la startup à la multinationale.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Plan 1 -->
+                <div class="pricing-card p-8">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-[#051536] mb-4">Essentiel</h3>
+                        <div class="text-4xl font-bold text-[#051536] mb-2">
+                            <span class="text-2xl">À partir de</span><br>
+                            <span class="bg-gradient-to-r from-[#051536] to-[#0a1f4d] bg-clip-text text-transparent">250.000</span>
+                        </div>
+                        <div class="text-[#ffa600] font-bold">FCFA/mois</div>
+                        <p class="text-gray-600 mt-2">PME jusqu'à 20 salariés</p>
+                    </div>
+
+                    <ul class="custom-list space-y-3 mb-8">
+                        <li>Gestion administrative du personnel</li>
+                        <li>Traitement de la paie mensuelle</li>
+                        <li>Déclarations sociales mensuelles</li>
+                        <li>Gestion des congés et absences</li>
+                        <li class="text-gray-400 line-through">Recrutement inclus</li>
+                        <li class="text-gray-400 line-through">Audit RH annuel</li>
+                    </ul>
+
+                    <a href="#contact" class="block w-full bg-gray-100 text-[#051536] text-center font-bold py-4 rounded-xl hover:bg-gray-200 transition">Demander un devis</a>
+                </div>
+
+                <!-- Plan 2 (Most Popular) -->
+                <div class="pricing-card popular p-8">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-[#051536] mb-4">Premium</h3>
+                        <div class="text-4xl font-bold text-[#051536] mb-2">
+                            <span class="text-2xl">À partir de</span><br>
+                            <span class="bg-gradient-to-r from-[#ffa600] to-[#ffd166] bg-clip-text text-transparent">450.000</span>
+                        </div>
+                        <div class="text-[#ffa600] font-bold">FCFA/mois</div>
+                        <p class="text-gray-600 mt-2">Entreprises 21-100 salariés</p>
+                    </div>
+
+                    <ul class="custom-list space-y-3 mb-8">
+                        <li>Tous services Essentiel</li>
+                        <li>Gestion des avantages sociaux</li>
+                        <li>Reporting RH personnalisé</li>
+                        <li>Assistance téléphonique prioritaire</li>
+                        <li>2 recrutements par an inclus</li>
+                        <li>Audit RH annuel</li>
+                    </ul>
+
+                    <a href="#contact" class="btn-gold w-full text-center font-bold py-4 rounded-xl">Choisir cette offre</a>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="pricing-card p-8">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-[#051536] mb-4">Entreprise</h3>
+                        <div class="text-4xl font-bold text-[#051536] mb-2">
+                            <span class="text-2xl">Sur</span><br>
+                            <span class="bg-gradient-to-r from-[#051536] to-[#0a1f4d] bg-clip-text text-transparent">Devis</span>
+                        </div>
+                        <div class="text-[#ffa600] font-bold">Personnalisé</div>
+                        <p class="text-gray-600 mt-2">+100 salariés & multinationales</p>
+                    </div>
+
+                    <ul class="custom-list space-y-3 mb-8">
+                        <li>Tous services Premium</li>
+                        <li>Manager RH dédié</li>
+                        <li>Formation des managers</li>
+                        <li>Accompagnement aux changements</li>
+                        <li>Recrutements illimités</li>
+                        <li>Tableau de bord RH temps réel</li>
+                    </ul>
+
+                    <a href="#contact" class="block w-full bg-gray-100 text-[#051536] text-center font-bold py-4 rounded-xl hover:bg-gray-200 transition">Demander un devis</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 section-dark text-white">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Contactez-nous</h2>
+                <div class="gold-line mx-auto mb-6"></div>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                    Nos experts RH sont à votre écoute pour discuter de vos besoins et vous proposer une solution sur mesure.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
+                <!-- Contact Info -->
+                <div class="lg:col-span-1">
+                    <h3 class="text-2xl font-bold mb-8">Nos Coordonnées</h3>
+
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <div class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] text-[#051536] p-3 rounded-xl mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Adresse</h4>
+                                <p class="text-gray-300">Immeuble Le Général, 3ème étage<br>Angle Boulevard de la République<br>Plateau, Abidjan, Côte d'Ivoire</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] text-[#051536] p-3 rounded-xl mr-4">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Téléphone</h4>
+                                <p class="text-gray-300">+225 27 22 44 55 66<br>Lun-Ven: 8h-18h</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] text-[#051536] p-3 rounded-xl mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Email</h4>
+                                <p class="text-gray-300">contact@rhpartnersafric.com<br>support@rhpartnersafric.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] text-[#051536] p-3 rounded-xl mr-4">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Horaires</h4>
+                                <p class="text-gray-300">Lundi - Vendredi: 8h00 - 18h00<br>Samedi: 9h00 - 13h00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12">
+                        <h4 class="font-bold text-lg mb-4">Suivez-nous</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] w-12 h-12 rounded-xl flex items-center justify-center text-[#051536] hover:shadow-lg transition">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] w-12 h-12 rounded-xl flex items-center justify-center text-[#051536] hover:shadow-lg transition">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] w-12 h-12 rounded-xl flex items-center justify-center text-[#051536] hover:shadow-lg transition">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-gradient-to-br from-[#ffa600] to-[#ffd166] w-12 h-12 rounded-xl flex items-center justify-center text-[#051536] hover:shadow-lg transition">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white p-8 rounded-2xl shadow-2xl">
+                        <h3 class="text-2xl font-bold text-[#051536] mb-6">Envoyez-nous un message</h3>
+
+                        <form id="contact-form">
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-[#051536] font-bold mb-2">Nom complet *</label>
+                                    <input type="text" id="name" class="w-full p-4 border border-gray-300 rounded-xl form-input" required>
+                                </div>
+                                <div>
+                                    <label for="company" class="block text-[#051536] font-bold mb-2">Entreprise *</label>
+                                    <input type="text" id="company" class="w-full p-4 border border-gray-300 rounded-xl form-input" required>
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="email" class="block text-[#051536] font-bold mb-2">Email *</label>
+                                    <input type="email" id="email" class="w-full p-4 border border-gray-300 rounded-xl form-input" required>
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-[#051536] font-bold mb-2">Téléphone *</label>
+                                    <input type="tel" id="phone" class="w-full p-4 border border-gray-300 rounded-xl form-input" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="service" class="block text-[#051536] font-bold mb-2">Service intéressé</label>
+                                <select id="service" class="w-full p-4 border border-gray-300 rounded-xl form-input">
+                                    <option value="gestion-rh">Gestion RH Externalisée</option>
+                                    <option value="paie">Paie Externalisée</option>
+                                    <option value="recrutement">Recrutement & Intégration</option>
+                                    <option value="creation-entreprise">Création d'Entreprise</option>
+                                    <option value="plusieurs">Plusieurs services</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-8">
+                                <label for="message" class="block text-[#051536] font-bold mb-2">Message *</label>
+                                <textarea id="message" rows="5" class="w-full p-4 border border-gray-300 rounded-xl form-input" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-gold w-full font-bold py-4 rounded-xl text-lg">
+                                <i class="fas fa-paper-plane mr-2"></i> Envoyer la demande
+                            </button>
+                        </form>
+
+                        <div id="form-success" class="hidden mt-6 p-4 bg-gradient-to-r from-green-100 to-green-50 text-green-800 rounded-xl border border-green-200">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-600 text-xl mr-3"></i>
+                                <div>
+                                    <p class="font-bold">Message envoyé avec succès !</p>
+                                    <p>Un consultant RH vous contactera dans les 24 heures.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#051536] text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#ffa600] to-[#ffd166] flex items-center justify-center">
+                            <i class="fas fa-users text-[#051536] text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="brand-font text-xl font-bold">RH Partners</div>
+                            <div class="text-sm font-semibold text-[#ffa600]">AFRIC</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400">
+                        Votre partenaire en excellence RH en Afrique. Expertise, innovation et accompagnement sur mesure pour transformer vos ressources humaines en avantage compétitif.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-white">Liens Rapides</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-[#ffa600] transition">Accueil</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-[#ffa600] transition">À propos</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-[#ffa600] transition">Services</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-[#ffa600] transition">Solutions</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-[#ffa600] transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-white">Nos Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-[#ffa600] transition">Gestion RH Externalisée</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#ffa600] transition">Paie Externalisée</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#ffa600] transition">Recrutement & Intégration</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#ffa600] transition">Création d'Entreprise</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#ffa600] transition">Audit RH Stratégique</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-white">Informations Légales</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-[#ffa600] transition">Mentions légales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#ffa600] transition">Politique de confidentialité</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#ffa600] transition">Politique RGPD</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#ffa600] transition">Conditions générales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#ffa600] transition">Plan du site</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-800 text-center">
+                <p class="text-gray-400">&copy; 2023 RH Partners Afric. Tous droits réservés.</p>
+                <p class="text-gray-500 mt-2">
+                    Conçu avec <i class="fas fa-heart text-[#ffa600] mx-1"></i> pour l'excellence RH en Afrique
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Testimonial slider
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-slide');
+
+        function showTestimonial(index) {
+            testimonials.forEach(t => t.classList.add('hidden'));
+            testimonials[index].classList.remove('hidden');
+            currentTestimonial = index;
+        }
+
+        document.getElementById('next-testimonial').addEventListener('click', function() {
+            let nextIndex = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(nextIndex);
+        });
+
+        document.getElementById('prev-testimonial').addEventListener('click', function() {
+            let prevIndex = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            showTestimonial(prevIndex);
+        });
+
+        // Auto-rotate testimonials
+        setInterval(function() {
+            let nextIndex = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(nextIndex);
+        }, 8000);
+
+        // Animated counters
+        function animateCounter(elementId, target, duration) {
+            const element = document.getElementById(elementId);
+            let start = 0;
+            const increment = target / (duration / 16);
+
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target + "+";
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        }
+
+        // Start counters when section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('client-count', 120, 1500);
+                    animateCounter('payroll-count', 8500, 2000);
+                    animateCounter('recruitment-count', 320, 1500);
+                    animateCounter('experience-count', 12, 1000);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('.pattern-bg'));
+
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const successMessage = document.getElementById('form-success');
+            successMessage.classList.remove('hidden');
+
+            // Reset form
+            setTimeout(() => {
+                this.reset();
+                successMessage.classList.add('hidden');
+            }, 5000);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+
+                if (href === '#') return;
+
+                e.preventDefault();
+                const targetElement = document.querySelector(href);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('animate-slide-up')) {
+                        entry.target.style.animation = 'slideUp 0.8s ease-out forwards';
+                    }
+                    if (entry.target.classList.contains('animate-slide-left')) {
+                        entry.target.style.animation = 'slideLeft 0.8s ease-out forwards';
+                        entry.target.style.animationDelay = entry.target.getAttribute('data-delay') || '0s';
+                    }
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.animate-slide-up, .animate-slide-left').forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+        // Service cards animation on hover
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
 </body>
 </html>

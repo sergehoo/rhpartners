@@ -1,0 +1,81 @@
+{% load static %}
+<nav class="fixed top-0 inset-x-0 z-40 bg-white/90 border-b border-slate-200/80 backdrop-blur dark:bg-nuit/90 dark:border-slate-800/70">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+       <a href="#home" class="flex items-center gap-2 group">
+    <div class="relative w-10 h-10 rounded-2xl bg-white/80 dark:bg-slate-900/80 shadow-md flex items-center justify-center overflow-hidden">
+
+        <!-- Logo Light -->
+        <img src="{% static 'img/logo-light.png' %}"
+             alt="Logo RH Partners Afric"
+             class="w-8 h-8 object-contain block dark:hidden transition-opacity duration-300">
+
+        <!-- Logo Dark -->
+        <img src="{% static 'img/logo-dark.png' %}"
+             alt="Logo RH Partners Afric (Dark)"
+             class="w-8 h-8 object-contain hidden dark:block transition-opacity duration-300">
+    </div>
+
+    <div class="leading-tight">
+        <div class="font-semibold text-sm sm:text-base text-slate-900 dark:text-slate-50">
+            RH Partners <span class="text-gold">Afric</span>
+        </div>
+        <div class="text-[7px] text-slate-500 dark:text-slate-400 uppercase tracking-[0.25em] hidden sm:block">
+            Externalisation RH & Paie
+        </div>
+    </div>
+</a>
+
+        <div class="hidden lg:flex items-center gap-8 text-xs sm:text-xs">
+            <a href="#home" class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Accueil</a>
+            <a href="#about" class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">À propos</a>
+            <a href="#services"
+               class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Services</a>
+            <a href="#process"
+               class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Processus</a>
+            <a href="#pricing" class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Tarifs</a>
+            <a href="#testimonials" class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Témoignages</a>
+            <a href="#faq" class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">FAQ</a>
+            <a href="#contact"
+               class="nav-link text-slate-700 hover:text-gold dark:text-slate-100 transition">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <!-- Theme toggle -->
+            <button id="theme-toggle"
+                    class="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-700 flex items-center justify-center text-sm shadow-sm hover:bg-slate-100 transition dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
+                    aria-label="Changer de thème">
+                <i id="theme-icon-sun" class="fas fa-sun text-gold hidden"></i>
+                <i id="theme-icon-moon" class="fas fa-moon"></i>
+            </button>
+
+            <a href="#contact"
+               class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold text-nuit text-xs font-semibold shadow-soft-gold hover:-translate-y-[1px] transition">
+                <span>Parler à un consultant</span>
+                <i class="fas fa-arrow-right text-[11px]"></i>
+            </a>
+
+            <button id="mobile-menu-btn" class="lg:hidden text-slate-800 dark:text-slate-100">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu"
+         class="lg:hidden hidden border-t border-slate-200 bg-white/95 dark:border-slate-800 dark:bg-nuit/95">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-3 text-sm">
+            <a href="#home" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Accueil</a>
+            <a href="#about" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">À propos</a>
+            <a href="#services" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Services</a>
+            <a href="#process" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Processus</a>
+            <a href="#pricing" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Tarifs</a>
+            <a href="#testimonials"
+               class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Témoignages</a>
+            <a href="#faq" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">FAQ</a>
+            <a href="#contact" class="text-slate-800 hover:text-gold dark:text-slate-100 transition">Contact</a>
+            <a href="#contact"
+               class="mt-2 inline-flex justify-center px-4 py-2 rounded-full bg-gold text-nuit text-xs font-semibold shadow-soft-gold">
+                Demander un devis
+            </a>
+        </div>
+    </div>
+</nav>

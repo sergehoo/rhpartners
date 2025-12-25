@@ -1,0 +1,77 @@
+# =========================
+# Django
+# =========================
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+
+# Migrations compilées
+**/__pycache__/
+
+# =========================
+# Environnements & secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Python
+# =========================
+*.egg-info/
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# =========================
+# Virtualenv
+# =========================
+venv/
+.envvenv/
+.venv/
+
+# =========================
+# Docker
+# =========================
+*.pid
+docker-compose.override.yml
+
+# =========================
+# Logs & runtime
+# =========================
+logs/
+*.log.*
+celerybeat.pid
+celerybeat-schedule
+
+# =========================
+# IDE / OS
+# =========================
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# =========================
+# Node / Front
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Traefik / Certs (si présents)
+# =========================
+acme.json
