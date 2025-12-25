@@ -5,7 +5,7 @@ import os
 DEBUG = True
 
 # Domaine(s) du site en prod
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 # ex: DJANGO_ALLOWED_HOSTS="rhpartnersafric.com,www.rhpartnersafric.com"
 
 # SECRET_KEY obligatoire via env en prod
