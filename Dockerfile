@@ -33,7 +33,7 @@ RUN useradd -m -u 10001 appuser \
  && chown -R appuser:appuser /app
 
 # Entrypoint
-COPY docker/entrypoint.sh /entrypoint.sh
+COPY /entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 USER appuser
