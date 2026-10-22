@@ -67,6 +67,7 @@ services:
       dockerfile: Dockerfile
     command: >
       gunicorn rhpartnersafric.wsgi:application
+      --no-control-socket
       --bind 0.0.0.0:8000
       --workers 2 --threads 1
       --worker-tmp-dir /dev/shm
