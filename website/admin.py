@@ -228,3 +228,83 @@ class JobApplicationAdmin(BaseTimestampedAdmin):
             "classes": ("collapse",),
         }),
     )
+
+
+from .models import CandidateProfile
+from django.urls import reverse
+from django.utils.html import format_html
+
+
+@admin.register(CandidateProfile)
+class CandidateProfileAdmin(admin.ModelAdmin):
+    list_display = ('name', 'profession', 'sector', 'profile_type', 'created_at')
+    list_filter = ('profile_type', 'sector', 'job_function')
+    search_fields = ('name', 'email', 'profession')
+    exclude = ('cv',)
+    readonly_fields = ('reference', 'details', 'download_cv')
+
+    def download_cv(self, obj):
+        if not obj.pk or not obj.cv:
+            return 'Aucun CV'
+        return format_html('<a href="{}">Télécharger le CV</a>', reverse('website:private_cv', args=[obj.pk]))
+
+from .models import Mission, GalleryPhoto, CandidateNote
+
+admin.site.site_header = 'RH PARTNERS AFRIC — Administration'
+admin.site.site_title = 'RH PARTNERS AFRIC'
+admin.site.index_title = 'Gestion du cabinet'
+
+
+class CandidateNoteInline(admin.TabularInline):
+    model = CandidateNote
+    extra = 0
+    fields = ('text', 'author', 'created_at')
+    readonly_fields = ('author', 'created_at')
+
+
+CandidateProfileAdmin.list_display = ('name', 'profession', 'sector', 'profile_type', 'job_offer', 'status', 'assigned_to', 'next_followup', 'created_at')
+CandidateProfileAdmin.list_filter = ('status', 'profile_type', 'assigned_to', 'sector', 'job_offer')
+CandidateProfileAdmin.list_editable = ('status', 'assigned_to', 'next_followup')
+CandidateProfileAdmin.search_fields = ('name', 'email', 'phone', 'profession', 'sector', 'job_function')
+CandidateProfileAdmin.inlines = (CandidateNoteInline,)
+CandidateProfileAdmin.autocomplete_fields = ('job_offer', 'assigned_to')
+CandidateProfileAdmin.readonly_fields = ('reference', 'details', 'download_cv', 'created_at', 'updated_at')
+CandidateProfileAdmin.date_hierarchy = 'created_at'
+
+def save_candidate_followups(self, request, form, formset, change):
+    instances = formset.save(commit=False)
+    for obj in formset.deleted_objects:
+        obj.delete()
+    for obj in instances:
+        if not obj.author_id:
+            obj.author = request.user
+        obj.save()
+    formset.save_m2m()
+
+CandidateProfileAdmin.save_formset = save_candidate_followups
+
+
+@admin.register(Mission)
+class MissionAdmin(BaseTimestampedAdmin):
+    list_display = ('title', 'client', 'status', 'owner', 'start_date', 'end_date')
+    list_filter = ('status', 'owner')
+    search_fields = ('title', 'client', 'description')
+    list_editable = ('status',)
+    autocomplete_fields = ('consultants', 'owner')
+    date_hierarchy = 'start_date'
+
+
+@admin.register(GalleryPhoto)
+class GalleryPhotoAdmin(BaseTimestampedAdmin):
+    list_display = ('title', 'thumbnail', 'date', 'mission', 'is_published', 'order')
+    list_filter = ('is_published', 'date', 'mission')
+    search_fields = ('title', 'caption')
+    list_editable = ('is_published', 'order')
+    autocomplete_fields = ('mission',)
+    readonly_fields = ('thumbnail', 'created_at', 'updated_at')
+
+    @admin.display(description='Aperçu')
+    def thumbnail(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" alt="" style="height:64px;max-width:120px;object-fit:cover">', obj.image.url)
+        return '—'

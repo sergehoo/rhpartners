@@ -30,3 +30,15 @@ urlpatterns = [
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+from .views import reference_content, candidate_submit, private_cv, TemplateView
+urlpatterns += [
+    path('api/content', reference_content),
+    path('api/candidates', candidate_submit),
+    path('consultants.html', TemplateView.as_view(template_name='website/consultants.html')),
+    path('consultants', TemplateView.as_view(template_name='website/consultants.html')),
+    path('private-cv/<int:pk>/', private_cv, name='private_cv'),
+]
+
+from .views import gallery_media
+urlpatterns += [path('api/media/<int:pk>', gallery_media)]

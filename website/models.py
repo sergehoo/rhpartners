@@ -419,3 +419,83 @@ class HeroSlide(models.Model):
 
     def __str__(self):
         return f"{self.get_position_display()} – {self.title or self.pair_key}"
+
+from .storage import PrivateCVStorage
+
+
+class CandidateProfile(TimeStampedModel):
+    status = models.CharField('Traitement', max_length=20, default='received', choices=[('received', 'Reçu'), ('review', 'À étudier'), ('contacted', 'Contacté'), ('interview', 'Entretien'), ('selected', 'Retenu'), ('rejected', 'Non retenu'), ('archived', 'Archivé')])
+    assigned_to = models.ForeignKey('auth.User', null=True, blank=True, on_delete=models.SET_NULL, verbose_name='Chargé du suivi')
+    job_offer = models.ForeignKey(JobOffer, null=True, blank=True, on_delete=models.SET_NULL, related_name='profiles', verbose_name='Offre visée')
+    next_followup = models.DateField('Prochaine relance', null=True, blank=True)
+    reference = models.UUIDField(unique=True)
+    name = models.CharField(max_length=120)
+    email = models.EmailField()
+    phone = models.CharField(max_length=40)
+    profession = models.CharField(max_length=180)
+    sector = models.CharField(max_length=180)
+    job_function = models.CharField(max_length=180)
+    profile_type = models.CharField(max_length=20, default='candidate')
+    details = models.JSONField(default=dict)
+    cv = models.FileField(upload_to='cvs/%Y/%m/', storage=PrivateCVStorage())
+    consent = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Profil CVthèque'
+        verbose_name_plural = 'CVthèque — candidats et consultants'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.name
+
+
+class Mission(TimeStampedModel):
+    title = models.CharField('Mission', max_length=200)
+    client = models.CharField('Client', max_length=180)
+    description = models.TextField('Objectifs et livrables', blank=True)
+    status = models.CharField('Statut', max_length=20, default='planned', choices=[('planned', 'À préparer'), ('active', 'En cours'), ('completed', 'Terminée'), ('cancelled', 'Annulée')])
+    start_date = models.DateField('Début', null=True, blank=True)
+    end_date = models.DateField('Fin', null=True, blank=True)
+    consultants = models.ManyToManyField(CandidateProfile, blank=True, related_name='missions', verbose_name='Intervenants')
+    owner = models.ForeignKey('auth.User', null=True, blank=True, on_delete=models.SET_NULL, verbose_name='Responsable')
+    notes = models.TextField('Notes internes', blank=True)
+
+    class Meta:
+        verbose_name = 'Mission'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.start_date and self.end_date and self.end_date < self.start_date:
+            raise ValidationError({'end_date': 'La fin doit suivre le début.'})
+
+
+class GalleryPhoto(TimeStampedModel):
+    title = models.CharField('Titre', max_length=180)
+    caption = models.TextField('Légende', blank=True)
+    image = models.ImageField('Photo', upload_to='gallery/%Y/%m/')
+    date = models.DateField('Date de l’événement')
+    mission = models.ForeignKey(Mission, null=True, blank=True, on_delete=models.SET_NULL)
+    is_published = models.BooleanField('Publier sur le site', default=False)
+    order = models.PositiveIntegerField('Ordre', default=0)
+
+    class Meta:
+        verbose_name = 'Photo de la galerie'
+        verbose_name_plural = 'Galerie photos'
+        ordering = ['order', '-date']
+
+    def __str__(self):
+        return self.title
+
+
+class CandidateNote(TimeStampedModel):
+    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='followups')
+    author = models.ForeignKey('auth.User', null=True, on_delete=models.SET_NULL)
+    text = models.TextField('Compte rendu / action réalisée')
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Note de suivi'

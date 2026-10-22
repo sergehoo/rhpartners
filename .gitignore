@@ -75,3 +75,4 @@ yarn-error.log*
 # Traefik / Certs (si présents)
 # =========================
 acme.json
+private_uploads/
