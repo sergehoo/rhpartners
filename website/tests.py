@@ -46,3 +46,31 @@ class CabinetAdministrationTests(TestCase):
         for model in ['candidateprofile', 'mission', 'galleryphoto', 'joboffer']:
             self.assertEqual(self.client.get(f'/admin/website/{model}/').status_code, 200)
             self.assertEqual(self.client.get(f'/admin/website/{model}/add/').status_code, 200)
+
+    def test_contact_requires_consent_and_saves_request(self):
+        from .models import ContactRequest
+        data = dict(name='Test', email='test@example.com', interest='Formation', message='Bonjour')
+        self.assertEqual(self.client.post('/api/contact', data).status_code, 400)
+        data['consent'] = 'on'
+        self.assertEqual(self.client.post('/api/contact', data).status_code, 200)
+        self.assertEqual(ContactRequest.objects.count(), 1)
+
+    def test_candidate_and_consultant_with_csrf(self):
+        from django.test import Client
+        from django.core.files.uploadedfile import SimpleUploadedFile
+        from .models import CandidateProfile
+        import uuid
+        c = Client(enforce_csrf_checks=True)
+        c.get('/')
+        token = c.cookies['csrftoken'].value
+        for kind in ['candidate', 'consultant']:
+            data = dict(name='Test', email='test@example.com', phone='123', profession='Consultant', sector='Conseil', job_function='RH', experience='2', consent='on', submission_id=str(uuid.uuid4()), profile_type=kind, csrfmiddlewaretoken=token)
+            if kind == 'consultant':
+                data.update(expertise='Formation', expertise_details='Management')
+            data['cv'] = SimpleUploadedFile('test.pdf', b'%PDF-1.4 test')
+            with self.settings(MEDIA_ROOT='/tmp/rh-tests-media'):
+                response = c.post('/api/candidates', data)
+            self.assertEqual(response.status_code, 200, response.content)
+        self.assertEqual(CandidateProfile.objects.count(), 2)
+        for profile in CandidateProfile.objects.all():
+            profile.cv.delete()

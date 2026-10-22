@@ -42,3 +42,6 @@ urlpatterns += [
 
 from .views import gallery_media
 urlpatterns += [path('api/media/<int:pk>', gallery_media)]
+
+from .views import contact_submit
+urlpatterns += [path('api/contact', contact_submit)]

@@ -26,7 +26,7 @@ RUN pip install --upgrade pip \
 COPY . /app/
 
 # Dossiers attendus par volumes (même si montés ensuite)
-RUN mkdir -p /app/static /app/staticfiles /app/media /app/logs /app/dbbackup
+RUN mkdir -p /app/static /app/staticfiles /app/media /app/logs /app/dbbackup /app/private_uploads
 
 # Ajouter un user non-root
 RUN useradd -m -u 10001 appuser \

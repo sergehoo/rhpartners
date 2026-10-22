@@ -9,6 +9,7 @@ volumes:
   pgdata:
   static_volume:
   media_volume:
+  private_cv_volume:
   dbbackups:
   logs_volume:
 
@@ -113,6 +114,7 @@ services:
 #      - static_volume:/app/static
       - static_volume:/app/staticfiles
       - media_volume:/var/www/media:rw
+      - private_cv_volume:/app/private_uploads:rw
       - dbbackups:/app/dbbackup
       - logs_volume:/app/logs:rw
 

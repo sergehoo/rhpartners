@@ -16,7 +16,7 @@ python manage.py collectstatic --noinput
 
 Les candidatures et profils consultants sont enregistrés dans `CandidateProfile` et consultables dans l’administration Django. Les CV sont stockés dans `private_uploads/`, à sauvegarder sur un volume persistant. Ce dossier ne doit pas être servi par le serveur web : les téléchargements passent par la vue réservée au personnel connecté.
 
-Les offres sont gérées dans l’administration Django (brouillon/publication, calendrier, contenu). La commande `import_reference_offers` importe les quatre offres initiales sans écraser les modifications. L’API affiche les offres publiées et non expirées, ainsi que les photos publiées de la galerie. Le contact prépare un e-mail dans la messagerie du visiteur, comme dans le modèle.
+Les offres sont gérées dans l’administration Django (brouillon/publication, calendrier, contenu). La commande `import_reference_offers` importe les quatre offres initiales sans écraser les modifications. L’API affiche les offres publiées et non expirées, ainsi que les photos publiées de la galerie. Le formulaire de contact enregistre les demandes dans l’administration. Le volume `private_cv_volume` conserve les CV en dehors des fichiers publics et permet leur écriture dans le conteneur en lecture seule.
 
 ## Vérifications réalisées
 

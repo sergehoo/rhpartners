@@ -156,3 +156,19 @@ def private_cv(request, pk):
     from django.shortcuts import get_object_or_404
     profile = get_object_or_404(CandidateProfile, pk=pk)
     return FileResponse(profile.cv.open('rb'), as_attachment=True)
+
+
+@require_POST
+def contact_submit(request):
+    from .models import ContactRequest
+    p = request.POST
+    if any(not p.get(k, '').strip() for k in ('name', 'email', 'interest', 'message')) or p.get('consent') != 'on':
+        return JsonResponse({'error': 'Complétez les champs obligatoires et acceptez le consentement.'}, status=400)
+    try:
+        validate_email(p['email'])
+    except ValidationError:
+        return JsonResponse({'error': 'Saisissez une adresse e-mail valide.'}, status=400)
+    if len(p['name']) > 100 or len(p['message']) > 4000 or len(p.get('company', '')) > 160:
+        return JsonResponse({'error': 'Le texte saisi dépasse la longueur autorisée.'}, status=400)
+    ContactRequest.objects.create(full_name=p['name'].strip(), email=p['email'].strip(), company=p.get('company', '').strip()[:150], service='autre', message='Besoin : '+p['interest'][:180]+'\n\n'+p['message'].strip(), consent=True)
+    return JsonResponse({'message': 'Votre demande a bien été enregistrée. Notre équipe vous recontactera.'})
